@@ -1,5 +1,6 @@
 package br.com.vestibular.modelo;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,10 +13,13 @@ public class Sala {
 	
 	@Id
 	@SequenceGenerator(
-			name="sala_cod", 
+			name="sala_id", 
 			sequenceName="sala_seq",
 			allocationSize=1)
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="sala_cod")
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="sala_id")
+	private Long id;
+	
+	@Column(unique=true)
 	private Integer codsala;
 	private Integer capacidade;
 
@@ -24,6 +28,14 @@ public class Sala {
 
 	public Sala() {
 		
+	}
+	
+	public Long getId() {
+		return id;
+	}
+	
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public Integer getCodsala() {

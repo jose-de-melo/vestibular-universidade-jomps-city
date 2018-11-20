@@ -34,6 +34,8 @@ public class Candidato {
 	@Temporal(TemporalType.DATE)
 	private Calendar datanascimento;
 	
+	@OneToOne
+	private Curso curso;
 	
 	/* Endereço */
 	private String rua;
@@ -84,9 +86,22 @@ public class Candidato {
 	public String getTelefone() {
 		return telefone;
 	}
+
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
+	
+	
+	public Curso getCurso() {
+		return curso;
+	}
+
+
+	public void setCurso(Curso curso) {
+		this.curso = curso;
+	}
+
+
 	public Calendar getDatanascimento() {
 		return datanascimento;
 	}

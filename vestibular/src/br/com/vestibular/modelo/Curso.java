@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,18 +17,20 @@ public class Curso {
 	
 	@Id
 	@SequenceGenerator(
-			name="curso_cod", 
+			name="curso_id", 
 			sequenceName="curso_seq",
 			allocationSize=1)
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="curso_cod")
-	private Integer codcurso;
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="curso_id")
+	private Long id;
 	
+	@Column(unique=true)
+	private Integer codcurso;
 	private String nome;
 	private String siglacurso;
 	private Integer numvagas;
 	private Integer totalinscritos;
 	
-	@OneToMany
+	@OneToMany(mappedBy="curso")
 	private List<Candidato> candidatos;
 	
 	@OneToMany(cascade=CascadeType.PERSIST, mappedBy="curso")
@@ -36,6 +39,14 @@ public class Curso {
 	public Curso() {
 		candidatos = new ArrayList<>();
 		salas = new ArrayList<>();
+	}
+	
+	public Long getId() {
+		return id;
+	}
+	
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public Integer getCodcurso() {
