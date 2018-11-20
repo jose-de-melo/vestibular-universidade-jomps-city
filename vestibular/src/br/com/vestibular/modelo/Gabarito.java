@@ -1,5 +1,6 @@
 package br.com.vestibular.modelo;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,6 +17,8 @@ public class Gabarito {
 			allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="gabarito_id")
 	private Long id;
+	
+	@Column(unique=true)
 	private Integer numeroquestao;
 	private Character reposta;
 	

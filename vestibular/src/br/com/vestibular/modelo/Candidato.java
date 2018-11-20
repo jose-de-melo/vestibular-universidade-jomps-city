@@ -3,6 +3,7 @@ package br.com.vestibular.modelo;
 import java.util.Calendar;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,6 +12,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.UniqueConstraint;
 
 
 @Entity
@@ -25,6 +27,7 @@ public class Candidato {
 	private Long id;
 	
 	private String numInscricao;
+	@Column(unique=true)
 	private String CPF;
 	private String nome;
 	private String telefone;
