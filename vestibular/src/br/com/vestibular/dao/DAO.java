@@ -36,9 +36,9 @@ public class DAO<T> {
 		manager.close();
 	}
 	
-	public T litaPorId(Long id){ 
+	public T listaPorPK(Object pk){ 
 		EntityManager manager = new JPAUtil().getEntityManager();
-		return manager.find(classe, id);
+		return manager.find(classe, pk);
 	}
 	
 	public List<T> listaTodos(){ 

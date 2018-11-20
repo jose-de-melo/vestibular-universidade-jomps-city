@@ -2,6 +2,7 @@ package br.com.vestibular.managebean;
 
 import br.com.vestibular.dao.DAO;
 import br.com.vestibular.modelo.Candidato;
+import br.com.vestibular.modelo.Curso;
 
 public class CandidatoMB {
 	
@@ -14,10 +15,15 @@ public class CandidatoMB {
 	public void salvar() {
 		DAO<Candidato> dao = new DAO<>(Candidato.class);
 		
-		if(candidato.getId() != null) {
-			/** VER SE É NECESSÁRIO PEGAR A REFERENCIA DO CURSO NO BD ANTES DE SALVAR
-			Curso curso = new DAO<>(Curso.class).litaPorId(candidato.getCurso().getId());
-			candidato.setCurso(curso);**/
+		if(candidato.getNumInscricao() != null) {
+			// Obtém o curso no BD pelo codigo forneciso no cadastro.
+			Curso curso = new DAO<>(Curso.class).listaPorPK(candidato.getCurso().getCodcurso());
+			candidato.setCurso(curso);
+			
+			// Obtém a nova inscrição para o curso.
+			Integer proxInscricao = curso.getCandidatos().size() + 1;
+			String inscricao = String.format("%s-%05d", curso.getSiglacurso(), proxInscricao);
+			candidato.setNumInscricao(inscricao);
 			
 			dao.adiciona(candidato);
 		}else

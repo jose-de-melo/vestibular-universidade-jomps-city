@@ -5,28 +5,19 @@ import java.util.Calendar;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.UniqueConstraint;
 
 
 @Entity
 public class Candidato {
 	
 	@Id
-	@SequenceGenerator(
-			name="candidato_id", 
-			sequenceName="candidato_seq",
-			allocationSize=1)
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="candidato_id")
-	private Long id;
-	
+	@Column(nullable = false)
 	private String numInscricao;
+	
 	@Column(unique=true)
 	private String CPF;
 	private String nome;
@@ -59,12 +50,6 @@ public class Candidato {
 	}
 	
 	
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
 	public String getNumInscricao() {
 		return numInscricao;
 	}
@@ -168,12 +153,14 @@ public class Candidato {
 	public void setTotalpontos(Integer totalpontos) {
 		this.totalpontos = totalpontos;
 	}
+
+
 	@Override
 	public String toString() {
-		return "Candidato [id=" + id + ", numInscricao=" + numInscricao + ", CPF=" + CPF + ", nome=" + nome
-				+ ", telefone=" + telefone + ", datanascimento=" + datanascimento + ", rua=" + rua + ", numero="
-				+ numero + ", complemento=" + complemento + ", bairro=" + bairro + ", cidade=" + cidade + ", estado="
-				+ estado + ", CEP=" + CEP + ", nota=" + nota + ", respostaprova=" + respostaprova + ", totalpontos="
+		return "Candidato [numInscricao=" + numInscricao + ", CPF=" + CPF + ", nome=" + nome + ", telefone=" + telefone
+				+ ", datanascimento=" + datanascimento + ", curso=" + curso + ", rua=" + rua + ", numero=" + numero
+				+ ", complemento=" + complemento + ", bairro=" + bairro + ", cidade=" + cidade + ", estado=" + estado
+				+ ", CEP=" + CEP + ", nota=" + nota + ", respostaprova=" + respostaprova + ", totalpontos="
 				+ totalpontos + "]";
 	}
 	
