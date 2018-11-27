@@ -46,5 +46,6 @@
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/primefaces-5.2.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/rocket-1.0.10.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/validation-api-1.1.0.Final.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/caelum-stella-core-2.1.2.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

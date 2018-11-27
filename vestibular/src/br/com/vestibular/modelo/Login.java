@@ -1,39 +1,28 @@
 package br.com.vestibular.modelo;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 public class Login {
 	
 
 	@Id
-	@SequenceGenerator(
-			name="login_id", 
-			sequenceName="login_seq",
-			allocationSize=1)
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="login_id")
-	private Long id;
+	@Column(nullable = false)
 	private String CPF;
+	
+	@NotEmpty(message="Senha não pode ser vazia")
 	private String senha;
+	
+	@NotEmpty(message="Perfil não pode ser vazio")
 	private String perfil;
 	
 	
 	public Login() {
 		
-	}
-
-
-	public Long getId() {
-		return id;
-	}
-
-
-	public void setId(Long id) {
-		this.id = id;
 	}
 
 
@@ -69,7 +58,8 @@ public class Login {
 
 	@Override
 	public String toString() {
-		return "Login [id=" + id + ", CPF=" + CPF + ", senha=" + senha + ", perfil=" + perfil + "]";
+		return "Login [CPF=" + CPF + ", senha=" + senha + ", perfil=" + perfil + "]";
 	}
-	
+
+
 }

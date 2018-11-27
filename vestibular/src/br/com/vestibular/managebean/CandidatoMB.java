@@ -1,9 +1,15 @@
 package br.com.vestibular.managebean;
 
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
+
 import br.com.vestibular.dao.DAO;
 import br.com.vestibular.modelo.Candidato;
 import br.com.vestibular.modelo.Curso;
 
+
+@ViewScoped
+@ManagedBean
 public class CandidatoMB {
 	
 	private Candidato candidato;

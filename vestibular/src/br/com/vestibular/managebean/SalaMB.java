@@ -1,8 +1,14 @@
 package br.com.vestibular.managebean;
 
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
+
 import br.com.vestibular.dao.DAO;
 import br.com.vestibular.modelo.Sala;
 
+
+@ViewScoped
+@ManagedBean
 public class SalaMB {
 	
 	private Sala sala;

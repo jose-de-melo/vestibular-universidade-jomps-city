@@ -26,8 +26,8 @@ body{
 #usuarioLogado  {
 	color: white;
 	display: block;
-	float: right;
 	right: 50%;
+	margin-top: 30px;
 	margin-right: -450px;
 	position: absolute;
 	top: 35px;
