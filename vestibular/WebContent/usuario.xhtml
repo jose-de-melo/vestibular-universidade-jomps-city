@@ -31,7 +31,7 @@
 				</p:inputMask>
 
 				<h:outputLabel value="Senha:" for="senha" />
-				<p:inputText id="senha" value="#{usuarioMB.usuario.senha}" />
+				<p:inputText type="password" id="senha" value="#{usuarioMB.usuario.senha}" />
 			</p:fieldset>
 			
 			<h:commandButton value="Salvar" action="#{usuarioMB.salvar}">

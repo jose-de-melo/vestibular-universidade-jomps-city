@@ -47,7 +47,4 @@ public class LoginMB {
 	public void setLogin(Login login) {
 		this.login = login;
 	}
-	
-	
-	
 }

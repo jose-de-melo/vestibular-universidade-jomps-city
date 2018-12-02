@@ -17,6 +17,7 @@ public class ValidaCPF implements Validator{
 		String cpf = value.toString();
 		
 		try {
+			System.out.println();
 			new CPFValidator().assertValid(cpf);
 		}catch (Exception e) {
 			throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_ERROR, "CPF inválido.", ""));

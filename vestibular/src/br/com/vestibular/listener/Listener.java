@@ -14,9 +14,7 @@ import br.com.vestibular.managebean.LoginMB;
 public class Listener  implements PhaseListener{
 	private static final long serialVersionUID = 1L;
 	
-	private HashSet<String> paginasSemLogin = new HashSet<>(Arrays.asList(
-																	"/login.xhtml",
-																	"/usuario.xhtml"));
+	private HashSet<String> paginasSemLogin = new HashSet<>(Arrays.asList( "/login.xhtml", "/usuario.xhtml"));
 
 	@Override
 	public void afterPhase(PhaseEvent event) {
