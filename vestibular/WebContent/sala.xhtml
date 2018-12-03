@@ -8,8 +8,33 @@
 
 <ui:composition template="/_template.xhtml">
 	<ui:define name="corpo">
-	
+
+		<h:outputScript name="jsf.js" library="javax.faces" target="head" />
+
+		<h:form id="cadastro">
+			<p:messages/>
 		
+			<h2>
+				<h:outputText value="Cadastrar Sala" />
+			</h2>
+			
+			<p:fieldset legend="Forneça os seguintes dados">
+				<h:outputLabel value="Curso:" for="cur"/>
+				
+				<h:selectOneMenu id="cur" value="#{salaMB.sala.curso.codcurso}" style="background-color: white;">
+					<f:selectItems value="#{cursoMB.cursos}" var="curso" itemValue="#{curso.codcurso}" itemLabel="#{curso.nome}"/>
+				</h:selectOneMenu>
+			
+				<h:outputLabel value="Capacidade da Sala:" for="capacidade"/>
+				<p:inputText id="capacidade" value="#{salaMB.sala.capacidade}" validatorMessage="A capacidade deve ser maior que 0!">
+					<f:validateDoubleRange minimum="1"/>
+				</p:inputText>
+			
+				<h:commandButton value="Cadastrar" action="#{salaMB.salvar}">
+					<f:ajax execute="@form" render=":cadastro"/>
+				</h:commandButton>
+			</p:fieldset>
+		</h:form>
 	</ui:define>
 </ui:composition>
 </html>

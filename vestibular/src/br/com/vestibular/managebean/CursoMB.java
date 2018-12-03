@@ -10,9 +10,8 @@ import br.com.vestibular.dao.DAO;
 import br.com.vestibular.mensagens.Mensagem;
 import br.com.vestibular.modelo.Curso;
 
-
-@ViewScoped
 @ManagedBean
+@ViewScoped
 public class CursoMB {
 
 	private Curso curso;
@@ -25,19 +24,17 @@ public class CursoMB {
 
 	public void salvar() {
 		DAO<Curso> dao = new DAO<>(Curso.class);
-
-		if(curso.getCodcurso() != null) {
-			curso.setCodcurso(dao.listaTodos().size() + 1);
+		
+		if(curso.getCodcurso() == null) {
 			curso.setTotalinscritos(0);
 			dao.adiciona(curso);
 			Mensagem.msgInfo("Curso cadastrado com sucesso!");
 		}else {
-			System.out.println("Entrou alterar");
 			dao.altera(curso);
 			Mensagem.msgInfo("Curso alterado com sucesso!");
 		}
 
-		curso = new Curso();
+		this.curso = new Curso();
 	}
 
 	public List<Curso> getCursos() {
