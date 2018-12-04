@@ -94,11 +94,5 @@ public class Curso {
 		this.salas = salas;
 	}
 
-	@Override
-	public String toString() {
-		return "Curso [codcurso=" + codcurso + ", nome=" + nome + ", siglacurso=" + siglacurso + ", numvagas="
-				+ numvagas + ", totalinscritos=" + totalinscritos + ", candidatos=" + candidatos + ", salas=" + salas
-				+ "]";
-	}
 
 }

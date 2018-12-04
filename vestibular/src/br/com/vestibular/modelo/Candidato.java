@@ -6,6 +6,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -25,7 +26,7 @@ public class Candidato {
 	@Temporal(TemporalType.DATE)
 	private Calendar datanascimento;
 	
-	@OneToOne
+	@ManyToOne
 	private Curso curso;
 	
 	/* Endereço */
@@ -48,7 +49,6 @@ public class Candidato {
 	public Candidato() {
 		datanascimento = Calendar.getInstance();
 	}
-	
 	
 	public String getNumInscricao() {
 		return numInscricao;
@@ -74,16 +74,6 @@ public class Candidato {
 
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
-	}
-	
-	
-	public Curso getCurso() {
-		return curso;
-	}
-
-
-	public void setCurso(Curso curso) {
-		this.curso = curso;
 	}
 
 
@@ -147,21 +137,24 @@ public class Candidato {
 	public void setRespostaprova(String respostaprova) {
 		this.respostaprova = respostaprova;
 	}
+	
+	public Curso getCurso() {
+		return curso;
+	}
+
+	public void setCurso(Curso curso) {
+		this.curso = curso;
+	}
+
 	public Integer getTotalpontos() {
 		return totalpontos;
 	}
+
+
 	public void setTotalpontos(Integer totalpontos) {
 		this.totalpontos = totalpontos;
 	}
 
 
-	@Override
-	public String toString() {
-		return "Candidato [numInscricao=" + numInscricao + ", CPF=" + CPF + ", nome=" + nome + ", telefone=" + telefone
-				+ ", datanascimento=" + datanascimento + ", curso=" + curso + ", rua=" + rua + ", numero=" + numero
-				+ ", complemento=" + complemento + ", bairro=" + bairro + ", cidade=" + cidade + ", estado=" + estado
-				+ ", CEP=" + CEP + ", nota=" + nota + ", respostaprova=" + respostaprova + ", totalpontos="
-				+ totalpontos + "]";
-	}
-	
+
 }

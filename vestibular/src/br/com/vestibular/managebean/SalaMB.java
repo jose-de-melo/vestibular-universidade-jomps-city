@@ -24,14 +24,15 @@ public class SalaMB {
 		
 		System.out.println(sala);
 
-		if(sala.getCodsala() != null) {
+		if(sala.getCodsala() == null) {
 			Curso curso = new DAO<>(Curso.class).listaPorPK(sala.getCurso().getCodcurso());
+			System.out.println("Curso: "+curso);
 			sala.setCurso(curso);
 			dao.adiciona(sala);
 			Mensagem.msgInfo("Sala cadastrada com sucesso!");
 		}else {
 			dao.altera(sala);
-			Mensagem.msgInfo("Sala cadastrada com sucesso!");
+			Mensagem.msgInfo("Sala alterada com sucesso!");
 		}
 
 		sala = new Sala();

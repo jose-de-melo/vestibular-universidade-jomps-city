@@ -9,7 +9,70 @@
 <ui:composition template="/_template.xhtml">
 	<ui:define name="corpo">
 	
+		<h:outputScript name="jsf.js" library="javax.faces" target="head" />
+
+		<h:form id="cadastro">
+			<p:messages/>
 		
+			<h2>
+				<h:outputText value="Cadastrar Candidato" />
+			</h2>
+			
+			<p:fieldset legend="Curso">
+				<h:selectOneMenu id="cur" value="#{candidatoMB.codCurso}" style="background-color: white;">
+						<f:selectItems value="#{cursoMB.cursos}" var="curso" itemValue="#{curso.codcurso}" itemLabel="#{curso.nome}"/>
+				</h:selectOneMenu>
+			</p:fieldset>
+			
+			<p:fieldset legend="Dados do Candidato">
+			
+				<h:outputLabel value="CPF:" for="CPF" />
+				<p:inputMask id="CPF" value="#{candidatoMB.candidato.CPF}" mask="999.999.999-99">
+					<f:validator validatorId="valida_cpf"></f:validator>
+				</p:inputMask>
+				
+					
+				<h:outputLabel value="Nome:" for="nome"/>
+				<p:inputText id="nome" value="#{candidatoMB.candidato.nome}"/>
+				
+				
+				<h:outputLabel value="Telefone:" for="telefone" />
+				<p:inputMask id="telefone" value="#{candidatoMB.candidato.telefone}" mask="(99) 9999-9999"/>
+				
+				
+				<h:outputLabel value="Data de Nascimento:" for="data_nasc" />
+				<p:calendar id="data_nasc" value="#{candidatoMB.candidato.datanascimento.time}" pattern="dd-MM-yyyy" />
+				
+			</p:fieldset>
+			<p:fieldset legend="Endereço">
+			
+				<h:outputLabel value="CEP:" for="cep" />
+				<p:inputMask id="cep" value="#{candidatoMB.candidato.CEP}" mask="99999-999"/>
+				
+				<h:outputLabel value="Rua:" for="rua"/>
+				<p:inputText id="rua" value="#{candidatoMB.candidato.rua}"/>
+				
+				<h:outputLabel value="Número:" for="numero"/>
+				<p:inputText id="numero" value="#{candidatoMB.candidato.numero}"/>
+				
+				<h:outputLabel value="Complemento:" for="complem"/>
+				<p:inputText id="complem" value="#{candidatoMB.candidato.complemento}"/>
+				
+				<h:outputLabel value="Bairro:" for="bairro"/>
+				<p:inputText id="bairro" value="#{candidatoMB.candidato.bairro}"/>
+				
+				<h:outputLabel value="Cidade:" for="cidade"/>
+				<p:inputText id="cidade" value="#{candidatoMB.candidato.cidade}"/>
+				
+				<h:outputLabel value="Estado:" for="estado"/>
+				<p:inputText id="estado" value="#{candidatoMB.candidato.estado}"/>
+			
+			</p:fieldset>
+				
+			<h:commandButton value="Cadastrar" action="#{candidatoMB.salvar}">
+				<f:ajax execute="@form" render=":cadastro"/>
+			</h:commandButton>
+		</h:form>
 	</ui:define>
 </ui:composition>
 </html>

@@ -23,7 +23,7 @@ public class Sala {
 	private Curso curso;
 
 	public Sala() {
-		
+		this.curso = new Curso();
 	}
 
 	public Integer getCodsala() {
