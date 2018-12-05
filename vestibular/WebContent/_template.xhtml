@@ -61,6 +61,11 @@
 				</p:submenu>
 				<p:menuitem value="Curso" url="curso.xhtml" />
 				<p:menuitem value="Candidato" url="candidato.xhtml" />
+				
+				<p:submenu label="Consultas">
+					<p:menuitem value="Candidato por inscrição" url="consultaCandidatoInsc.xhtml"/>
+				</p:submenu>
+				
 				<p:menuitem value="Sala" url="sala.xhtml" />
 				<p:menuitem value="Gabarito" url="gabarito.xhtml" />
 				<p:menuitem value="Sair" action="#{loginMB.logout}"  rendered="#{not empty loginMB.login.CPF}"/>
