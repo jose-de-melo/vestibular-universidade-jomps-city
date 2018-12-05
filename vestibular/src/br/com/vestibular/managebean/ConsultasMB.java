@@ -4,5 +4,5 @@ import javax.faces.bean.ManagedBean;
 
 @ManagedBean
 public class ConsultasMB {
-	
+	private String numInscricao = "";
 }
