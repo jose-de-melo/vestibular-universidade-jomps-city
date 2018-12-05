@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/_template.xhtml">
+	<ui:define name="corpo">
+		<h:outputScript name="jsf.js" library="javax.faces" target="head" />
+
+		
+		<h:form id="cadastro">
+			<p:messages />
+			
+			<h2>
+				<h:outputText value="Consultar Candidato por Inscrição" />
+			</h2>
+
+			<p:fieldset legend="Dados do Curso">
+				<h:outputLabel value="Inscrição do Candidato:" for="insc" />
+				<p:inputText id="insc" value="#{cursoMB.curso.nome}" />
+
+				<h:commandButton value="Consultar" action="#{cursoMB.salvar}">
+					<f:ajax execute="@form" render=":cadastro"/>
+				</h:commandButton>
+
+			</p:fieldset>
+			
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>
