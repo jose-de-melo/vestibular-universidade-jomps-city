@@ -1,5 +1,7 @@
 package br.com.vestibular.managebean;
 
+import java.util.List;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
@@ -14,6 +16,7 @@ import br.com.vestibular.modelo.Curso;
 public class CandidatoMB {
 	
 	private Candidato candidato;
+	private List<Candidato> candidatos;
 	private Integer codCurso;
 
 	public CandidatoMB() {
@@ -42,6 +45,7 @@ public class CandidatoMB {
 		
 		candidato = new Candidato();
 	}
+	
 
 	public Candidato getCandidato() {
 		return candidato;
@@ -57,6 +61,14 @@ public class CandidatoMB {
 
 	public void setCodCurso(Integer codCurso) {
 		this.codCurso = codCurso;
+	}
+
+	public List<Candidato> getCandidatos() {
+		return candidatos;
+	}
+
+	public void setCandidatos(List<Candidato> candidatos) {
+		this.candidatos = candidatos;
 	}
 	
 }
