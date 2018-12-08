@@ -15,4 +15,9 @@ public class Mensagem {
 		FacesContext.getCurrentInstance()
 			.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, mensagem, ""));
 	}
+	
+	public static void msgWarning(String mensagem) {
+		FacesContext.getCurrentInstance()
+			.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, mensagem, ""));
+	}
 }

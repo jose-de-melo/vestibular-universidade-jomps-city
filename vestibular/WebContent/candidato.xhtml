@@ -15,19 +15,22 @@
 			<p:messages/>
 		
 			<h2>
-				<h:outputText value="Cadastrar Candidato" />
+				<h:outputText value="Cadastrar Candidato" rendered="#{empty candidatoMB.candidato.numInscricao}"/>
+				<h:outputText value="Alterar Candidato" rendered="#{not empty candidatoMB.candidato.numInscricao}"/>
 			</h2>
 			
 			<p:fieldset legend="Curso">
-				<h:selectOneMenu id="cur" value="#{candidatoMB.codCurso}" style="background-color: white;">
+				<h:selectOneMenu id="cur" value="#{candidatoMB.codCurso}" style="background-color: white;" rendered="#{empty candidatoMB.candidato.numInscricao}">
 						<f:selectItems value="#{cursoMB.cursos}" var="curso" itemValue="#{curso.codcurso}" itemLabel="#{curso.nome}"/>
 				</h:selectOneMenu>
+				
+				<h:outputLabel value="#{candidatoMB.candidato.curso.nome}" rendered="#{not empty candidatoMB.candidato.numInscricao}"/>
 			</p:fieldset>
 			
 			<p:fieldset legend="Dados do Candidato">
 			
 				<h:outputLabel value="CPF:" for="CPF" />
-				<p:inputMask id="CPF" value="#{candidatoMB.candidato.CPF}" mask="999.999.999-99">
+				<p:inputMask id="CPF" value="#{candidatoMB.candidato.CPF}" mask="999.999.999-99" >
 					<f:validator validatorId="valida_cpf"></f:validator>
 				</p:inputMask>
 				
@@ -69,7 +72,7 @@
 			
 			</p:fieldset>
 				
-			<h:commandButton value="Cadastrar" action="#{candidatoMB.salvar}">
+			<h:commandButton value="Salvar" action="#{candidatoMB.salvar}">
 				<f:ajax execute="@form" render=":cadastro"/>
 			</h:commandButton>
 		</h:form>

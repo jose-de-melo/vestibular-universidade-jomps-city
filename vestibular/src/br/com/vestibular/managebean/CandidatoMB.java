@@ -3,7 +3,7 @@ package br.com.vestibular.managebean;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.SessionScoped;
 
 import br.com.vestibular.dao.DAO;
 import br.com.vestibular.mensagens.Mensagem;
@@ -11,7 +11,7 @@ import br.com.vestibular.modelo.Candidato;
 import br.com.vestibular.modelo.Curso;
 
 
-@ViewScoped
+@SessionScoped
 @ManagedBean
 public class CandidatoMB {
 	
@@ -44,6 +44,10 @@ public class CandidatoMB {
 		}
 		
 		candidato = new Candidato();
+	}
+	
+	public void remove(Candidato candidato) {
+		System.out.println("Candidato 2 será removido: " + candidato.getNumInscricao() + "\t" + candidato.getNome());		
 	}
 	
 

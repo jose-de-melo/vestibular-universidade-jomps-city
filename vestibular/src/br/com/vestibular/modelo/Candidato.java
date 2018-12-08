@@ -48,6 +48,7 @@ public class Candidato {
 	
 	public Candidato() {
 		datanascimento = Calendar.getInstance();
+		curso = new Curso();
 	}
 	
 	public String getNumInscricao() {

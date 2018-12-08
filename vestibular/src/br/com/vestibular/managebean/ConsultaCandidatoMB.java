@@ -6,6 +6,7 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
+import br.com.vestibular.dao.CandidatoDAO;
 import br.com.vestibular.dao.DAO;
 import br.com.vestibular.mensagens.Mensagem;
 import br.com.vestibular.modelo.Candidato;
@@ -28,25 +29,21 @@ public class ConsultaCandidatoMB {
 		Candidato c = dao.listaPorPK(candidato.getNumInscricao());
 		
 		if(c == null) {
-			System.out.println("CANDIDATO NÃO ENCONTRADO");
-			Mensagem.msgErro("Candidato não encontrado.");
+			Mensagem.msgWarning("Candidato não encontrado.");
 			this.candidatos = new ArrayList<>();
 		}else {
-			System.out.println("CANDIDATO ENCONTRADO");
 			this.candidatos.add(c);
 		}
 	}
 	
 	public void consultarCurso() {
+		this.candidatos = new CandidatoDAO().pesquisaPorCurso(candidato.getCurso().getCodcurso());
 		
-	}
-	
-	public void remove(Candidato candidato) {
-		System.out.println("Candidato será removido: " + candidato.getNumInscricao() + "\t" + candidato.getNome());		
+		if(this.candidatos.isEmpty())
+			Mensagem.msgWarning("Nenhum candidato encontrado.");
 	}
 
-	public String alterar() {
-		System.out.println("Candidato será alterado: ");
+	public String redirectAlterar() {
 		return  "candidato?faces-redirect=true";
 	}
 
