@@ -37,6 +37,14 @@ public class Curso {
 		candidatos = new ArrayList<>();
 		salas = new ArrayList<>();
 	}
+	
+	@Override
+	public int hashCode() {
+		if(codcurso != null && nome != null)
+			return codcurso.hashCode() + nome.hashCode();
+		
+		return 0;
+	}
 
 	public Integer getCodcurso() {
 		return codcurso;

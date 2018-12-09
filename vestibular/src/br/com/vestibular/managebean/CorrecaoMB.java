@@ -2,6 +2,7 @@ package br.com.vestibular.managebean;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -9,6 +10,8 @@ import javax.faces.bean.ViewScoped;
 import br.com.vestibular.dao.DAO;
 import br.com.vestibular.mensagens.Mensagem;
 import br.com.vestibular.modelo.Candidato;
+import br.com.vestibular.modelo.Gabarito;
+import br.com.vestibular.modelo.Nota;
 
 @ViewScoped
 @ManagedBean
@@ -25,8 +28,8 @@ public class CorrecaoMB {
 		try {
 			
 			/*
-				DAW00001ABCDDCEABCAAACCBDEADABCDDCEABCAAACCBDEADABCDADCEAB 
-				DAW00002ABCDDCEABCAAACCBDEADABCDDCEABCAAACCBDEADABCDADCEAB
+				DAW00001ABCEDCEABCAAACCBDEADABCDDCCABCAEACCBDEADABCDADCEAB 
+				DAW00002EBCDDCEABCAAACCBDEADABCDDCEABCAAACCBDEADABCDADCEBB
 			 */
 			
 			realizarCorrecao(respostasString);
@@ -42,14 +45,36 @@ public class CorrecaoMB {
 	
 	private void realizarCorrecao(String respostasS) throws Exception {
 		ArrayList<Candidato> candidatos = obterCandidatosComRespostas(respostasS);
+		DAO<Nota> daoNota = new DAO<>(Nota.class);
 		
+		List<Gabarito> gabaritos = new DAO<>(Gabarito.class).listaTodos();
+		List<Nota> notas = new ArrayList<>();
 		for(Candidato c : candidatos){
 			System.out.println(c.getNome());
 			System.out.println(c.getRespostaprova());
 			System.out.println();
-			//String respostas[] = c.getRespostaprova().split("");
+			
+			Nota nota = c.getNota();
+			if(nota == null)
+				nota = new Nota();
+			
+			nota.setCandidato(c);
+			
+			int acertos = 0;
+			for(Gabarito questao : gabaritos) {
+				char resposta = c.getRespostaprova().charAt(questao.getNumeroquestao() - 1);
+				if(resposta == questao.getReposta())
+					acertos++;
+			}
+			
+			nota.setAcertos(acertos);
+			notas.add(nota);
+			
+			c.setTotalpontos(nota.getAcertos() * 2);
 		}
 		
+		daoNota.altera(notas.toArray(new Nota[0]));
+		new DAO<>(Candidato.class).altera(candidatos.toArray(new Candidato[0]));
 	}
 
 	private ArrayList<Candidato> obterCandidatosComRespostas(String respostasS) throws Exception {
@@ -77,6 +102,8 @@ public class CorrecaoMB {
 			// Verifica o número de respostas
 			if(c.getRespostaprova().length() < 50)
 				throw new Exception(String.format("O %dº candidato possui apenas %d respostas.", candRespostas.size(), c.getRespostaprova().length()));
+			
+			c.setRespostaprova(c.getRespostaprova().toUpperCase());
 		}
 		
 		return candRespostas;

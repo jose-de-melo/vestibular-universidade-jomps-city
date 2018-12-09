@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="_template.xhtml">
+	<ui:define name="corpo">
+		<h:outputScript name="jsf.js" library="javax.faces" target="head" />
+
+		<p:messages />
+
+		<ui:repeat var="resultado" value="#{relatorioMB.resultados}">
+			<p:fieldset>
+				<div>
+					<h:outputLabel value="Curso" for="teste" />
+					<h:outputLabel id="teste" value="#{resultado.curso.nome}" style="background-color: white; color: black; text-align:center;"/>
+				</div>
+				
+				<br></br>
+				<br></br>
+				
+				<p:dataTable value="#{resultado.candidatos}" var="cand">
+
+					<p:column>
+						<f:facet name="header">Inscrição</f:facet>
+					#{cand.numInscricao}
+				</p:column>
+
+					<p:column>
+						<f:facet name="header">Nome</f:facet>
+					#{cand.nome}
+				</p:column>
+
+					<p:column>
+						<f:facet name="header">Data de Nascimento</f:facet>
+						<h:outputText value="#{cand.datanascimento.time}">
+							<f:convertDateTime type="date" pattern="dd/MM/yyyy"
+								dateStyle="short" />
+						</h:outputText>
+					</p:column>
+
+					<p:column>
+						<f:facet name="header">Nota</f:facet>
+					#{cand.totalpontos}
+				</p:column>
+
+					<p:column>
+						<f:facet name="header">Colocação</f:facet>
+					#{cand.nota.acertos}
+				</p:column>
+				
+				</p:dataTable>
+				<br></br>
+				<br></br>
+				
+				<div>
+					<h:outputLabel value="Total Candidatos" />
+					<h:outputLabel value="#{resultado.candidatos.size()}" style="background-color: white; color: black; text-align:center;"/>
+				</div>
+			</p:fieldset>
+			
+			<br></br>
+		</ui:repeat>
+
+	</ui:define>
+</ui:composition>
+</html>

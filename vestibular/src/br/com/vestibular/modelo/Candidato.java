@@ -40,7 +40,7 @@ public class Candidato {
 	
 	
 	/* Dados prova */
-	@OneToOne(cascade=CascadeType.PERSIST, mappedBy="candidato")
+	@OneToOne(cascade=CascadeType.ALL, mappedBy="candidato")
 	private Nota nota;
 	private String respostaprova;
 	private Integer totalpontos;
@@ -49,6 +49,7 @@ public class Candidato {
 	public Candidato() {
 		datanascimento = Calendar.getInstance();
 		curso = new Curso();
+		nota = new Nota();
 	}
 	
 	public String getNumInscricao() {

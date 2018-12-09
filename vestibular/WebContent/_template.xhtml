@@ -70,6 +70,17 @@
 				<p:menuitem value="Sala" url="sala.xhtml" />
 				<p:menuitem value="Gabarito" url="gabarito.xhtml" />
 				<p:menuitem value="Correção" url="correcao.xhtml" />
+				
+				<p:submenu label="Relatório">
+					<p:menuitem value="Alunos" url=""/>
+					<p:menuitem value="Alunos por Curso" url=""/>
+					<p:menuitem value="Alunos por Sala" url=""/>
+					<p:menuitem value="Alunos por Curso" url=""/>
+					<p:menuitem value="Aprovados" url="rel_aprovados.xhtml" />
+					<p:menuitem value="Salas" url=""/>
+					<p:menuitem value="Gabarito" url=""/>
+				</p:submenu>
+		
 				<p:menuitem value="Sair" action="#{loginMB.logout}"  rendered="#{not empty loginMB.login.CPF}"/>
 			</p:menubar>
 		</h:form>
