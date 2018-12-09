@@ -40,7 +40,7 @@ public class Candidato {
 	
 	
 	/* Dados prova */
-	@OneToOne(cascade=CascadeType.PERSIST, mappedBy="candidato")
+	@OneToOne(cascade=CascadeType.ALL, mappedBy="candidato")
 	private Nota nota;
 	private String respostaprova;
 	private Integer totalpontos;

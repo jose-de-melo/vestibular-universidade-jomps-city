@@ -9,19 +9,44 @@
 <ui:composition template="/_template.xhtml">
 	<ui:define name="corpo">
 
-			<h:form id="cadastro">
-				<p:messages />
-				
-				<p:fieldset legend="Cadastrar Gabarito">
-					<h:outputText value="Respostas" for="gabarito" />
-					
-					<p:inputTextarea id="gabarito" value="#{gabaritoMB.gabaritoString}">
-					</p:inputTextarea>
-					
-	  				<h:commandButton value="Enviar" action="#{gabaritoMB.upload}" />
-				</p:fieldset>		
-			</h:form>
-		
+		<h:form id="cadastro">
+			<p:messages />
+
+			<h1>
+				<h:outputText rendered="#{empty gabaritoMB.gabaritoString}"
+					value="Cadastrar Gabarito" />
+				<h:outputText rendered="#{not empty gabaritoMB.gabaritoString}"
+					value="Alterar Gabarito" />
+			</h1>
+			<p:fieldset legend="Dados">
+				<h:outputText value="Respostas" for="gabarito" />
+
+				<p:inputTextarea id="gabarito" value="#{gabaritoMB.gabaritoString}">
+				</p:inputTextarea>
+
+				<h:commandButton value="Enviar" action="#{gabaritoMB.upload}" />
+			</p:fieldset>
+		</h:form>
+
+		<h:form id="lista" rendered="#{not empty gabaritoMB.gabaritos}">
+			<p:fieldset legend="Gabarito Atual">
+				<p:dataTable value="#{gabaritoMB.gabaritos}" var="gabarito">
+					<p:column style="width: 500px;">
+						<f:facet name="header">Respostas</f:facet>
+							#{gabarito}
+						</p:column>
+
+					<p:column>
+						<h:commandLink styleClass="btn" style="color: black;"
+							value="Alterar">
+							<f:setPropertyActionListener value="#{gabarito}"
+								target="#{gabaritoMB.gabaritoString}" />
+							<f:ajax execute="@form" render=":cadastro" />
+						</h:commandLink>
+					</p:column>
+				</p:dataTable>
+			</p:fieldset>
+		</h:form>
 	</ui:define>
 </ui:composition>
 </html>

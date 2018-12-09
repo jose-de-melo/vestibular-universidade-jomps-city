@@ -9,6 +9,7 @@ import br.com.vestibular.dao.DAO;
 import br.com.vestibular.mensagens.Mensagem;
 import br.com.vestibular.modelo.Candidato;
 import br.com.vestibular.modelo.Curso;
+import br.com.vestibular.modelo.Nota;
 
 
 @ManagedBean
@@ -22,7 +23,6 @@ public class CandidatoMB {
 	public CandidatoMB() {
 		candidato = new Candidato();
 		candidatos = new DAO<>(Candidato.class).listaTodos();
-		
 	}
 	
 	public void salvar() {
@@ -39,6 +39,7 @@ public class CandidatoMB {
 			curso.setTotalinscritos(curso.getCandidatos().size() + 1);
 			String inscricao = String.format("%s%05d", curso.getSiglacurso(), proxInscricao);
 			candidato.setNumInscricao(inscricao);
+			candidato.setNota(new Nota());
 			
 			dao.adiciona(candidato);
 			new DAO<>(Curso.class).altera(curso);
@@ -63,7 +64,7 @@ public class CandidatoMB {
 		candidatos = dao.listaTodos();
 		Mensagem.msgDelete("Candidato removido!");
 	}
-
+	
 	public Candidato getCandidato() {
 		return candidato;
 	}

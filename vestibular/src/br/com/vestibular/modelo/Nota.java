@@ -1,5 +1,6 @@
 package br.com.vestibular.modelo;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,8 +19,8 @@ public class Nota {
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="candidato_id")
 	private Long id;
 	
-	@OneToOne
+	@OneToOne(cascade=CascadeType.ALL)
 	private Candidato candidato;
-	private Integer acertos;
+	private Integer acertos = 0;
 
 }
