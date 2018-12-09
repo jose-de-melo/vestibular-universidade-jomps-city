@@ -29,9 +29,10 @@ public class ConsultaCandidatoMB {
 		Candidato c = dao.listaPorPK(candidato.getNumInscricao());
 		
 		if(c == null) {
-			Mensagem.msgWarning("Candidato não encontrado.");
-			this.candidatos = new ArrayList<>();
+			Mensagem.msgWarning("Candidato não encontrado!");
+			this.candidatos = new ArrayList<Candidato>();
 		}else {
+			this.candidatos = new ArrayList<Candidato>();
 			this.candidatos.add(c);
 		}
 	}
@@ -40,11 +41,7 @@ public class ConsultaCandidatoMB {
 		this.candidatos = new CandidatoDAO().pesquisaPorCurso(candidato.getCurso().getCodcurso());
 		
 		if(this.candidatos.isEmpty())
-			Mensagem.msgWarning("Nenhum candidato encontrado.");
-	}
-
-	public String redirectAlterar() {
-		return  "candidato?faces-redirect=true";
+			Mensagem.msgWarning("Nenhum candidato encontrado!");
 	}
 
 	public Candidato getCandidato() {

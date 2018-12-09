@@ -3,7 +3,7 @@ package br.com.vestibular.managebean;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 
 import br.com.vestibular.dao.DAO;
 import br.com.vestibular.mensagens.Mensagem;
@@ -11,8 +11,8 @@ import br.com.vestibular.modelo.Candidato;
 import br.com.vestibular.modelo.Curso;
 
 
-@SessionScoped
 @ManagedBean
+@ViewScoped
 public class CandidatoMB {
 	
 	private Candidato candidato;
@@ -21,6 +21,8 @@ public class CandidatoMB {
 
 	public CandidatoMB() {
 		candidato = new Candidato();
+		candidatos = new DAO<>(Candidato.class).listaTodos();
+		
 	}
 	
 	public void salvar() {
@@ -33,10 +35,14 @@ public class CandidatoMB {
 			
 			// Obtém a nova inscrição para o curso.
 			Integer proxInscricao = curso.getCandidatos().size() + 1;
+
+			curso.setTotalinscritos(curso.getCandidatos().size() + 1);
 			String inscricao = String.format("%s%05d", curso.getSiglacurso(), proxInscricao);
 			candidato.setNumInscricao(inscricao);
 			
 			dao.adiciona(candidato);
+			new DAO<>(Curso.class).altera(curso);
+			
 			Mensagem.msgInfo("Candidato cadastrado com sucesso!");
 		}else {
 			dao.altera(candidato);
@@ -44,12 +50,19 @@ public class CandidatoMB {
 		}
 		
 		candidato = new Candidato();
+		candidatos = dao.listaTodos();
 	}
 	
-	public void remove(Candidato candidato) {
-		System.out.println("Candidato 2 será removido: " + candidato.getNumInscricao() + "\t" + candidato.getNome());		
+	public void remover(Candidato candidato) {
+		DAO<Candidato> dao = new DAO<>(Candidato.class);
+		DAO<Curso> daoCurso = new DAO<>(Curso.class);
+		Curso curso = daoCurso.listaPorPK(candidato.getCurso().getCodcurso());
+		dao.remove(candidato);
+		curso.setTotalinscritos(curso.getCandidatos().size());
+		daoCurso.altera(curso);
+		candidatos = dao.listaTodos();
+		Mensagem.msgDelete("Candidato removido!");
 	}
-	
 
 	public Candidato getCandidato() {
 		return candidato;

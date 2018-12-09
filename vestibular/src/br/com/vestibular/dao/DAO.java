@@ -20,6 +20,13 @@ public class DAO<T> {
 		manager.close();
 	}
 	
+	public void altera(T objeto){ 
+		EntityManager manager = new JPAUtil().getEntityManager();
+		manager.getTransaction().begin();
+		manager.merge(objeto);
+		manager.getTransaction().commit();
+		manager.close();
+	}
 	
 	@SuppressWarnings("unchecked")
 	public void adiciona(T... objetos){ 
@@ -29,14 +36,6 @@ public class DAO<T> {
 		for(Object objeto : objetos)
 			manager.persist(objeto);
 			
-		manager.getTransaction().commit();
-		manager.close();
-	}
-	
-	public void altera(T objeto){ 
-		EntityManager manager = new JPAUtil().getEntityManager();
-		manager.getTransaction().begin();
-		manager.merge(objeto);
 		manager.getTransaction().commit();
 		manager.close();
 	}
@@ -72,6 +71,5 @@ public class DAO<T> {
 		query.select(query.from(classe));
 		return manager.createQuery(query).getResultList();
 	}
-	
-
 }
+

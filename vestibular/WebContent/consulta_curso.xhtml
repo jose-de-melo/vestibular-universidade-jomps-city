@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/_template.xhtml">
+	<ui:define name="corpo">
+		<h:outputScript name="jsf.js" library="javax.faces" target="head" />
+
+
+		<p:messages />
+
+		<h2>
+			<h:outputText value="Consultar Curso" />
+		</h2>
+
+		<h:form>
+		<p:fieldset legend="Consulta por C�digo">
+			<h:outputLabel value="C�digo do Curso:" for="cod" />
+			<p:inputText id="cod" value="#{consultaCursoMB.codCurso}" />
+
+			<h:commandButton value="Consultar"
+				action="#{consultaCursoMB.consultarCurso}" />
+				</p:fieldset>
+		</h:form>
+		
+
+		<h:form id="resultado" rendered="#{not empty consultaCursoMB.curso}">
+			<p:dataTable value="#{consultaCursoMB.cursos}" var="curso">
+				<p:column>
+					<f:facet name="header">Código</f:facet>
+					#{curso.codcurso}
+				</p:column>
+
+				<p:column>
+					<f:facet name="header">Nome</f:facet>
+					#{curso.nome}
+				</p:column>
+				
+				<p:column>
+					<f:facet name="header">Sigla</f:facet>
+					#{curso.siglacurso}
+				</p:column>
+
+				<p:column>
+					<f:facet name="header">Número de Vagas</f:facet>
+					#{curso.numvagas}
+				</p:column>
+
+				<p:column>
+					<p:commandLink action="#{candidatoMB.remove(cand)}"
+						styleClass="btn btn-danger" value="Remover">
+					</p:commandLink>
+				</p:column>
+			</p:dataTable>
+		</h:form>
+
+	</ui:define>
+</ui:composition>
+</html>

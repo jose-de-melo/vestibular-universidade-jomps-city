@@ -12,7 +12,7 @@
 
 		
 			<p:messages />
-			
+			 
 			<p:tabView>
 				<h2>
 					<h:outputText value="Consultar Candidato" />
@@ -82,15 +82,6 @@
 						value="Remover">
 					</p:commandLink>
 				</p:column>
-				
-				<p:column>
-					<p:commandLink  action="#{consultaCandidatoMB.redirectAlterar}" styleClass="btn btn-danger" 
-						value="Alterar">
-						<f:setPropertyActionListener value="#{cand}" target="#{candidatoMB.candidato}">
-						</f:setPropertyActionListener>
-					</p:commandLink>
-				</p:column>
-				
 			</p:dataTable>
 		</h:form>
 					
