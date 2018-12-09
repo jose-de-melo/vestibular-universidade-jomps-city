@@ -47,6 +47,4 @@ public class DAO<T> {
 		query.select(query.from(classe));
 		return manager.createQuery(query).getResultList();
 	}
-	
-
 }

@@ -18,8 +18,8 @@
 		</h2>
 
 		<h:form>
-		<p:fieldset legend="Consulta por Código">
-			<h:outputLabel value="Código do Curso:" for="cod" />
+		<p:fieldset legend="Consulta por Cï¿½digo">
+			<h:outputLabel value="Cï¿½digo do Curso:" for="cod" />
 			<p:inputText id="cod" value="#{consultaCursoMB.codCurso}" />
 
 			<h:commandButton value="Consultar"
@@ -31,7 +31,7 @@
 		<h:form id="resultado" rendered="#{not empty consultaCursoMB.curso}">
 			<p:dataTable value="#{consultaCursoMB.cursos}" var="curso">
 				<p:column>
-					<f:facet name="header">Código</f:facet>
+					<f:facet name="header">CÃ³digo</f:facet>
 					#{curso.codcurso}
 				</p:column>
 
@@ -46,7 +46,7 @@
 				</p:column>
 
 				<p:column>
-					<f:facet name="header">Número de Vagas</f:facet>
+					<f:facet name="header">NÃºmero de Vagas</f:facet>
 					#{curso.numvagas}
 				</p:column>
 
