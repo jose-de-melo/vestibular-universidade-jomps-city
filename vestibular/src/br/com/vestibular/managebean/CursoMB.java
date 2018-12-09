@@ -35,6 +35,7 @@ public class CursoMB {
 		}
 
 		this.curso = new Curso();
+		getCursos();
 	}
 
 	public List<Curso> getCursos() {
