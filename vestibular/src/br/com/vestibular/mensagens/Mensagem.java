@@ -20,4 +20,9 @@ public class Mensagem {
 		FacesContext.getCurrentInstance()
 			.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, mensagem, ""));
 	}
+	
+	public static void msgDelete(String mensagem) {
+		FacesContext.getCurrentInstance()
+			.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, mensagem, ""));
+	}
 }

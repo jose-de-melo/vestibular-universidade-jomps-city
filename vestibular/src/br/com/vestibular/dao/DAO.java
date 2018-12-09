@@ -1,12 +1,8 @@
 package br.com.vestibular.dao;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaQuery;
-
-import br.com.vestibular.modelo.Candidato;
 
 public class DAO<T> {
 	
