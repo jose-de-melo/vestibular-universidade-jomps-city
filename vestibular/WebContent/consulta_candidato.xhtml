@@ -78,8 +78,9 @@
 				</p:column>
 				
 				<p:column>
-					<p:commandLink  action="#{candidatoMB.remove(cand)}" styleClass="btn btn-danger" 
+					<p:commandLink  action="#{candidatoMB.remover(cand)}" styleClass="btn btn-danger" 
 						value="Remover">
+						<f:ajax execute="@form" render=":resultado" />
 					</p:commandLink>
 				</p:column>
 			</p:dataTable>

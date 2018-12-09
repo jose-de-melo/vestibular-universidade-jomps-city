@@ -37,6 +37,12 @@ public class CursoMB {
 		this.curso = new Curso();
 		getCursos();
 	}
+	
+	public void remover(Curso curso) {
+		DAO<Curso> dao = new DAO<>(Curso.class);
+		dao.remove(curso);
+		Mensagem.msgInfo("Curso removido com sucesso.");
+	}
 
 	public List<Curso> getCursos() {
 		DAO<Curso> dao = new DAO<>(Curso.class);

@@ -85,6 +85,11 @@ public class CorrecaoMB {
 		
 		for(String resposta : respostasProvas) {
 			Candidato c = new Candidato();
+			resposta = resposta.trim();
+
+			// Verifica se possui número de inscrição e respostas
+			if(resposta.length() < 58)
+				throw new Exception(String.format("Numero de inscrição ou número de respostas do %dº candidato é inválido", candRespostas.size() + 1));
 			
 			c.setNumInscricao(resposta.substring(0, 8));
 			c = dao.listaPorPK(c.getNumInscricao());
@@ -94,14 +99,11 @@ public class CorrecaoMB {
 			if(c == null)
 				throw new Exception(String.format("Numero de inscrição do %dº candidato é inválido", candRespostas.size()));
 			
+			c.setRespostaprova(resposta.substring(8));
 			// Verifica as respostas do candidato
-			c.setRespostaprova(resposta.substring(8).trim());
 			if(!c.getRespostaprova().matches("[ABCDEabcde]*"))
 				throw new Exception(String.format("O %dº candidato possui resposta inválida", candRespostas.size()));
 			
-			// Verifica o número de respostas
-			if(c.getRespostaprova().length() < 50)
-				throw new Exception(String.format("O %dº candidato possui apenas %d respostas.", candRespostas.size(), c.getRespostaprova().length()));
 			
 			c.setRespostaprova(c.getRespostaprova().toUpperCase());
 		}

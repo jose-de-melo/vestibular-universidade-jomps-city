@@ -4,11 +4,13 @@ import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.validation.constraints.NotNull;
 
 import br.com.vestibular.dao.DAO;
 import br.com.vestibular.mensagens.Mensagem;
 import br.com.vestibular.modelo.Candidato;
 import br.com.vestibular.modelo.Curso;
+import br.com.vestibular.modelo.Nota;
 
 
 @ManagedBean
@@ -17,12 +19,13 @@ public class CandidatoMB {
 	
 	private Candidato candidato;
 	private List<Candidato> candidatos;
+	
+	@NotNull(message="Você deve selecionar um curso.")
 	private Integer codCurso;
 
 	public CandidatoMB() {
 		candidato = new Candidato();
 		candidatos = new DAO<>(Candidato.class).listaTodos();
-		
 	}
 	
 	public void salvar() {
@@ -63,7 +66,7 @@ public class CandidatoMB {
 		candidatos = dao.listaTodos();
 		Mensagem.msgDelete("Candidato removido!");
 	}
-
+	
 	public Candidato getCandidato() {
 		return candidato;
 	}

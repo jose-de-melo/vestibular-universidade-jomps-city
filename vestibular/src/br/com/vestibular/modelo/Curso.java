@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Curso {
@@ -22,15 +23,18 @@ public class Curso {
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="curso_cod")
 	private Integer codcurso;
 	
+	@Size(min=1, message="O nome não pode ser vazio.")
 	private String nome;
+	
+	@Size(min=3,message="A sigla do curso não pode ser vazia.")
 	private String siglacurso;
 	private Integer numvagas;
 	private Integer totalinscritos;
 	
-	@OneToMany(mappedBy="curso")
+	@OneToMany(cascade=CascadeType.REMOVE, mappedBy="curso")
 	private List<Candidato> candidatos;
 	
-	@OneToMany(cascade=CascadeType.PERSIST, mappedBy="curso")
+	@OneToMany(cascade=CascadeType.REMOVE, mappedBy="curso")
 	private List<Sala> salas;
 
 	public Curso() {
@@ -67,7 +71,7 @@ public class Curso {
 	}
 
 	public void setSiglacurso(String siglacurso) {
-		this.siglacurso = siglacurso;
+		this.siglacurso = (siglacurso != null)? siglacurso.toUpperCase() : null;
 	}
 
 	public Integer getNumvagas() {

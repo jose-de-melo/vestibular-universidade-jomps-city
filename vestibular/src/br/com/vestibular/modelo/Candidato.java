@@ -10,6 +10,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Size;
 
 
 @Entity
@@ -21,6 +22,7 @@ public class Candidato {
 	
 	@Column(unique=true)
 	private String CPF;
+	@Size(min=1, message="O nome não pode ser vazio.")
 	private String nome;
 	private String telefone;
 	@Temporal(TemporalType.DATE)
@@ -40,7 +42,7 @@ public class Candidato {
 	
 	
 	/* Dados prova */
-	@OneToOne(cascade=CascadeType.ALL, mappedBy="candidato")
+	@OneToOne(cascade=CascadeType.REMOVE, mappedBy="candidato")
 	private Nota nota;
 	private String respostaprova;
 	private Integer totalpontos;
@@ -49,14 +51,13 @@ public class Candidato {
 	public Candidato() {
 		datanascimento = Calendar.getInstance();
 		curso = new Curso();
-		nota = new Nota();
 	}
 	
 	public String getNumInscricao() {
 		return numInscricao;
 	}
 	public void setNumInscricao(String numInscricao) {
-		this.numInscricao = numInscricao;
+		this.numInscricao = (numInscricao != null) ? numInscricao.toUpperCase() : null;
 	}
 	public String getCPF() {
 		return CPF;
@@ -119,7 +120,7 @@ public class Candidato {
 		return estado;
 	}
 	public void setEstado(String estado) {
-		this.estado = estado;
+		this.estado = (estado != null)? estado.toUpperCase() : null;
 	}
 	public String getCEP() {
 		return CEP;

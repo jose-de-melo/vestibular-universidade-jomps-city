@@ -21,6 +21,8 @@ public class Nota {
 	@OneToOne
 	private Candidato candidato;
 	private Integer acertos;
+	
+	
 	public Long getId() {
 		return id;
 	}

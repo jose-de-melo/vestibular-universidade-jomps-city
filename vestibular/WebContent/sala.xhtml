@@ -26,9 +26,12 @@
 				</h:selectOneMenu>
 			
 				<h:outputLabel value="Capacidade da Sala:" for="capacidade"/>
-				<p:inputText id="capacidade" value="#{salaMB.sala.capacidade}" validatorMessage="A capacidade deve ser maior que 0!">
-					<f:validateDoubleRange minimum="1"/>
-				</p:inputText>
+				<p:inputMask id="capacidade" value="#{salaMB.sala.capacidade}" 
+					required="true" requiredMessage="A capacidade não pode ser vazia"
+					validatorMessage="A capacidade deve ser maior que 0!">
+					
+					<f:validateDoubleRange minimum="1" /> 
+				</p:inputMask>
 			
 				<h:commandButton value="Cadastrar" action="#{salaMB.salvar}">
 					<f:ajax execute="@form" render=":cadastro"/>

@@ -23,7 +23,7 @@
 
 			<p:fieldset legend="Curso">
 				<h:selectOneMenu id="cur" value="#{candidatoMB.codCurso}"
-					style="background-color: white;"
+					style="background-color: white;" 
 					rendered="#{empty candidatoMB.candidato.numInscricao}">
 					<f:selectItems value="#{cursoMB.cursos}" var="curso"
 						itemValue="#{curso.codcurso}" itemLabel="#{curso.nome}" />
@@ -52,7 +52,7 @@
 
 
 				<h:outputLabel value="Data de Nascimento:" for="data_nasc" />
-				<p:calendar id="data_nasc"
+				<p:calendar id="data_nasc" mask="99-99-9999"
 					value="#{candidatoMB.candidato.datanascimento.time}"
 					pattern="dd-MM-yyyy" />
 
@@ -80,7 +80,7 @@
 				<p:inputText id="cidade" value="#{candidatoMB.candidato.cidade}" />
 
 				<h:outputLabel value="Estado:" for="estado" />
-				<p:inputText id="estado" value="#{candidatoMB.candidato.estado}" />
+				<p:inputMask id="estado" value="#{candidatoMB.candidato.estado}" mask="aa" />
 
 			</p:fieldset>
 
@@ -89,7 +89,7 @@
 			</h:commandButton>
 		</h:form>
 
-		<p:fieldset legend="Candidados Registrados">
+		<p:fieldset legend="Candidatos Registrados">
 			<h:form id="lista">
 
 

@@ -26,7 +26,7 @@ public class ConsultaCandidatoMB {
 
 	public void consultarInscricao() {	
 		DAO<Candidato> dao = new DAO<>(Candidato.class);
-		Candidato c = dao.listaPorPK(candidato.getNumInscricao());
+		Candidato c = dao.listaPorPK(candidato.getNumInscricao().toUpperCase());
 		
 		if(c == null) {
 			Mensagem.msgWarning("Candidato não encontrado!");

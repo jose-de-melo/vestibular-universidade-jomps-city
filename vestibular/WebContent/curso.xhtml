@@ -23,13 +23,17 @@
 				<p:inputText id="nome" value="#{cursoMB.curso.nome}" />
 
 				<h:outputLabel value="Sigla:" for="sigla" />
-				<p:inputText id="sigla" value="#{cursoMB.curso.siglacurso}" />
+				<p:inputMask id="sigla" value="#{cursoMB.curso.siglacurso}" 
+					mask="aaa" />
 
+				
 				<h:outputLabel value="Número de Vagas:" for="nVagas" />
-				<p:inputText id="nVagas" value="#{cursoMB.curso.numvagas}"
+				<p:inputMask id="nVagas" value="#{cursoMB.curso.numvagas}"
+					required="true" requiredMessage="Número de vagas não pode ser vazio"
 					validatorMessage="O número de vagas deve ser maior que 0.">
+					
 					<f:validateDoubleRange minimum="1" />
-				</p:inputText>
+				</p:inputMask>
 				
 				<h:commandButton value="Cadastrar" action="#{cursoMB.salvar}">
 					<f:ajax execute="@form" render=":cadastro"/>
