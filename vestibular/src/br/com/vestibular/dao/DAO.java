@@ -1,12 +1,8 @@
 package br.com.vestibular.dao;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaQuery;
-
-import br.com.vestibular.modelo.Candidato;
 
 public class DAO<T> {
 	
@@ -24,10 +20,35 @@ public class DAO<T> {
 		manager.close();
 	}
 	
+	
+	@SuppressWarnings("unchecked")
+	public void adiciona(T... objetos){ 
+		EntityManager manager = new JPAUtil().getEntityManager();
+		manager.getTransaction().begin();
+		
+		for(Object objeto : objetos)
+			manager.persist(objeto);
+			
+		manager.getTransaction().commit();
+		manager.close();
+	}
+	
 	public void altera(T objeto){ 
 		EntityManager manager = new JPAUtil().getEntityManager();
 		manager.getTransaction().begin();
 		manager.merge(objeto);
+		manager.getTransaction().commit();
+		manager.close();
+	}
+	
+	@SuppressWarnings("unchecked")
+	public void altera(T... objetos){ 
+		EntityManager manager = new JPAUtil().getEntityManager();
+		manager.getTransaction().begin();
+		
+		for(Object objeto : objetos)
+			manager.merge(objeto);
+		
 		manager.getTransaction().commit();
 		manager.close();
 	}

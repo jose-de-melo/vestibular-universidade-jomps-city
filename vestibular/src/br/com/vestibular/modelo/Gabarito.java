@@ -1,6 +1,5 @@
 package br.com.vestibular.modelo;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,22 +15,11 @@ public class Gabarito {
 			sequenceName="gabarito_seq",
 			allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="gabarito_id")
-	private Long id;
-	
-	@Column(unique=true)
 	private Integer numeroquestao;
 	private Character reposta;
 	
 	public Gabarito() {
 		
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
 	}
 
 	public Integer getNumeroquestao() {
@@ -52,7 +40,7 @@ public class Gabarito {
 
 	@Override
 	public String toString() {
-		return "Gabarito [id=" + id + ", numeroquestao=" + numeroquestao + ", reposta=" + reposta + "]";
+		return "Gabarito [numeroquestao=" + numeroquestao + ", reposta=" + reposta + "]";
 	}
-	
+
 }

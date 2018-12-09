@@ -33,7 +33,7 @@ public class CandidatoMB {
 			
 			// Obtém a nova inscrição para o curso.
 			Integer proxInscricao = curso.getCandidatos().size() + 1;
-			String inscricao = String.format("%s-%05d", curso.getSiglacurso(), proxInscricao);
+			String inscricao = String.format("%s%05d", curso.getSiglacurso(), proxInscricao);
 			candidato.setNumInscricao(inscricao);
 			
 			dao.adiciona(candidato);

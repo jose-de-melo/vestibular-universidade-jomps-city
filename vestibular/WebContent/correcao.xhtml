@@ -9,19 +9,21 @@
 <ui:composition template="/_template.xhtml">
 	<ui:define name="corpo">
 
-			<h:form id="cadastro">
-				<p:messages />
+		<h:form id="cadastro">
+			<p:messages />
 				
-				<p:fieldset legend="Cadastrar Gabarito">
-					<h:outputText value="Respostas" for="gabarito" />
-					
-					<p:inputTextarea id="gabarito" value="#{gabaritoMB.gabaritoString}">
-					</p:inputTextarea>
-					
-	  				<h:commandButton value="Enviar" action="#{gabaritoMB.upload}" />
-				</p:fieldset>		
-			</h:form>
-		
+			<p:fieldset legend="Realizar Correção">
+				<h:outputText value="Respostas dos candidatos" for="respostas" />
+
+				<p:inputTextarea id="respostas" value="#{correcaoMB.respostasString}">
+				</p:inputTextarea>
+
+				<h:commandButton value="Enviar" action="#{correcaoMB.upload}" />
+			</p:fieldset>
+		</h:form>
+
+
+
 	</ui:define>
 </ui:composition>
 </html>
