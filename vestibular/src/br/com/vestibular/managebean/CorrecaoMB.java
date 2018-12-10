@@ -2,14 +2,17 @@ package br.com.vestibular.managebean;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
+import br.com.vestibular.dao.CandidatoDAO;
 import br.com.vestibular.dao.DAO;
 import br.com.vestibular.mensagens.Mensagem;
 import br.com.vestibular.modelo.Candidato;
+import br.com.vestibular.modelo.Curso;
 import br.com.vestibular.modelo.Gabarito;
 import br.com.vestibular.modelo.Nota;
 
@@ -33,6 +36,7 @@ public class CorrecaoMB {
 			 */
 			
 			realizarCorrecao(respostasString);
+			refazerColocacao();
 			Mensagem.msgInfo("Correção realizada com sucesso.");
 
 		} catch(IOException e) {
@@ -43,6 +47,24 @@ public class CorrecaoMB {
 		} 
 	}
 	
+	private void refazerColocacao() {
+		List<Curso> cursos = new DAO<>(Curso.class).listaTodos();
+		
+		CandidatoDAO daoCand = new CandidatoDAO();
+		List<Candidato> candidatos;
+		for(Curso c : cursos) {
+			candidatos = daoCand.pesquisaPorCurso(c.getCodcurso());
+			Collections.sort(candidatos);
+			
+			int colocacao = 0;
+			for(Candidato cand : candidatos) {
+				cand.setColocacao(++colocacao);
+			}
+			
+			daoCand.altera(candidatos.toArray(new Candidato[0]));
+		}
+	}
+
 	private void realizarCorrecao(String respostasS) throws Exception {
 		ArrayList<Candidato> candidatos = obterCandidatosComRespostas(respostasS);
 		DAO<Nota> daoNota = new DAO<>(Nota.class);

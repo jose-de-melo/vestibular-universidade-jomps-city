@@ -1,6 +1,7 @@
 package br.com.vestibular.modelo;
 
 import java.util.Calendar;
+import java.util.Comparator;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -14,7 +15,7 @@ import javax.validation.constraints.Size;
 
 
 @Entity
-public class Candidato {
+public class Candidato implements Comparable<Candidato>{
 	
 	@Id
 	@Column(nullable = false)
@@ -31,6 +32,10 @@ public class Candidato {
 	@ManyToOne
 	private Curso curso;
 	
+	@ManyToOne
+	private Sala sala;
+	
+	
 	/* Endereço */
 	private String rua;
 	private String numero;
@@ -46,11 +51,13 @@ public class Candidato {
 	private Nota nota;
 	private String respostaprova;
 	private Integer totalpontos;
+	private Integer colocacao;
 	
 	
 	public Candidato() {
 		datanascimento = Calendar.getInstance();
 		curso = new Curso();
+		colocacao = 0;
 	}
 	
 	public String getNumInscricao() {
@@ -158,6 +165,37 @@ public class Candidato {
 		this.totalpontos = totalpontos;
 	}
 
+	public Integer getColocacao() {
+		return colocacao;
+	}
 
+	public void setColocacao(Integer colocacao) {
+		this.colocacao = colocacao;
+	}
+
+	/**
+	 *  Ordena em ordem decrescente, da maior nota para a menor.
+	 */
+	@Override
+	public int compareTo(Candidato c) {
+		if(totalpontos == null)
+			return 1;
+		
+		return c.totalpontos.compareTo(totalpontos);
+	}
+	
+	/**
+	 * Ordena em ordem crescente, da 1ª colocação a última
+	 */
+	public static class ComparadorColocacao implements Comparator<Candidato>{
+
+		@Override
+		public int compare(Candidato c1, Candidato c2) {
+			return c1.getColocacao().compareTo(c2.colocacao);
+		}
+		
+		
+	}
+	
 
 }

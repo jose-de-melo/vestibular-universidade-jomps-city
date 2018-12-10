@@ -8,8 +8,12 @@ import javax.persistence.Query;
 
 import br.com.vestibular.modelo.Candidato;
 
-public class CandidatoDAO {
+public class CandidatoDAO extends DAO<Candidato>{
 	
+	public CandidatoDAO() {
+		super(Candidato.class);
+	}
+
 	public List<Candidato> pesquisaPorCurso(Integer codcurso){
 		EntityManager em = new JPAUtil().getEntityManager();
 		em.getTransaction().begin();

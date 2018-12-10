@@ -34,7 +34,7 @@ public class Curso {
 	@OneToMany(cascade=CascadeType.REMOVE, mappedBy="curso")
 	private List<Candidato> candidatos;
 	
-	@OneToMany(cascade=CascadeType.REMOVE, mappedBy="curso")
+	@OneToMany(mappedBy="curso")
 	private List<Sala> salas;
 
 	public Curso() {

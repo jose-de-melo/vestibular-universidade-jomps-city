@@ -10,7 +10,6 @@ import br.com.vestibular.dao.DAO;
 import br.com.vestibular.mensagens.Mensagem;
 import br.com.vestibular.modelo.Candidato;
 import br.com.vestibular.modelo.Curso;
-import br.com.vestibular.modelo.Nota;
 
 
 @ManagedBean

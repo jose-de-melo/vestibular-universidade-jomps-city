@@ -12,22 +12,6 @@ public class DAO<T> {
 		this.classe = classe;
 	}
 	
-	public void adiciona(T objeto){ 
-		EntityManager manager = new JPAUtil().getEntityManager();
-		manager.getTransaction().begin();
-		manager.persist(objeto);
-		manager.getTransaction().commit();
-		manager.close();
-	}
-	
-	public void altera(T objeto){ 
-		EntityManager manager = new JPAUtil().getEntityManager();
-		manager.getTransaction().begin();
-		manager.merge(objeto);
-		manager.getTransaction().commit();
-		manager.close();
-	}
-	
 	@SuppressWarnings("unchecked")
 	public void adiciona(T... objetos){ 
 		EntityManager manager = new JPAUtil().getEntityManager();
