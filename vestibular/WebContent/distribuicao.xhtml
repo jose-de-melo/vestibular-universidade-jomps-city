@@ -10,10 +10,19 @@
 	<ui:define name="corpo">
 		<h:outputScript name="jsf.js" library="javax.faces" target="head" />
 		
+		<h2>
+			<h:outputText value="Distribuição dos Candidatos por Sala" />
+		</h2>
+		
 		<h:form>
-		
+			<p:fieldset>
+				<h:outputText value="Distribuição dos Candidatos: " />
+				<br></br>
+				<br></br>
+				<h:commandButton value="Distribuir" action="#{distribuicaoSalaMB.distribuir}" />
+				<br></br>
+			</p:fieldset>
 		</h:form>
-		
 	</ui:define>
 </ui:composition>
 </html>

@@ -1,6 +1,7 @@
 package br.com.vestibular.modelo;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -32,6 +33,16 @@ public class Sala implements Comparable<Sala> {
 	public Sala() {
 		this.candidatos = new ArrayList<>();
 		this.curso = new Curso();
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if(obj == null) return false;
+		if(obj == this) return true;
+		if(!(obj instanceof Sala)) return false;
+		
+		Sala sala = (Sala) obj;
+		return this.codsala == sala.codsala;
 	}
 
 	public Integer getCodsala() {
@@ -66,14 +77,6 @@ public class Sala implements Comparable<Sala> {
 		this.candidatos = candidatos;
 	}
 
-	public List<Candidato> getCandidatos() {
-		return candidatos;
-	}
-
-	public void setCandidatos(List<Candidato> candidatos) {
-		this.candidatos = candidatos;
-	}
-
 	@Override
 	public String toString() {
 		return "Sala [codsala=" + codsala + ", capacidade=" + capacidade + ", curso=" + curso + "]";
@@ -89,6 +92,25 @@ public class Sala implements Comparable<Sala> {
 		
 		
 		return codsala.compareTo(s.codsala);
+	}
+	
+	/**
+	 * Ordena em ordem crescente da capacidade
+	 */
+	public static class ComparadorCapacidade implements Comparator<Sala>{
+
+		@Override
+		public int compare(Sala s1, Sala s2) {
+			if(s1.capacidade == null)
+				return 1;
+			
+			if(s2.capacidade == null)
+				return -1;
+			
+			
+			return s1.capacidade.compareTo(s2.capacidade);
+		}
+		
 	}
 	
 }

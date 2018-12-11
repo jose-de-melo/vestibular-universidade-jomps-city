@@ -45,7 +45,7 @@ public class RelCandSalaMB {
 			
 			for(Resultado res : resultados) {
 				
-				formatter.format("Sala: %05s\r\n", res.getSala().getCodsala());
+				formatter.format("Sala: %05d  Capacidade: %d\r\n", res.getSala().getCodsala(), res.getSala().getCapacidade());
 				formatter.format("%-12s %-35s %-20s %-11s\r\n", "Inscrição", "Nome", "Data de Nascimento", "Colocação");
 				
 				for(Candidato c : res.getCandidatos()) {

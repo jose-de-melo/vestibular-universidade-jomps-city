@@ -13,13 +13,13 @@
 		<p:messages />
 		
 		<h2>
-			<h:outputText value="Relatório de Aprovados"/>
+			<h:outputText value="Relatório de Candidatos Por Sala"/>
 		</h2>
 		
 		<br></br>
 		
 		<h:form>
-			<p:fieldset legend="Download do Relatório de Aprovados">
+			<p:fieldset legend="Download do Relatório de Candidatos Por Sala">
 			  		<h:outputText value="Download do Relatório"/>
 				    <p:commandButton value="Download" ajax="false" onclick="PrimeFaces.monitorDownload(start, stop);" icon="pi pi-arrow-down">
 				        <p:fileDownload value="#{relCandSalaMB.file}" />
@@ -35,6 +35,9 @@
 				<div>
 					<h:outputLabel value="Sala" for="sala" />
 					<h:outputLabel id="sala" value="#{resultado.sala.codsala}" style="background-color: white; color: black; text-align:center;"/>
+					
+					<h:outputLabel value="Capacidade" for="capac" />
+					<h:outputLabel id="capac" value="#{resultado.sala.capacidade}" style="background-color: white; color: black; text-align:center;"/>
 				</div>
 				
 				<br></br>
@@ -59,11 +62,6 @@
 								dateStyle="short" />
 						</h:outputText>
 					</p:column>
-
-					<p:column>
-						<f:facet name="header">Nota</f:facet>
-					#{cand.totalpontos}
-				</p:column>
 
 					<p:column>
 						<f:facet name="header">Colocação</f:facet>

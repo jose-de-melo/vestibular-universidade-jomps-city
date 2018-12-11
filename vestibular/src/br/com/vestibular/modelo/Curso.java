@@ -1,6 +1,7 @@
 package br.com.vestibular.modelo;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -43,11 +44,13 @@ public class Curso {
 	}
 	
 	@Override
-	public int hashCode() {
-		if(codcurso != null && nome != null)
-			return codcurso.hashCode() + nome.hashCode();
+	public boolean equals(Object obj) {
+		if(obj == null) return false;
+		if(obj == this) return true;
+		if(!(obj instanceof Curso)) return false;
 		
-		return 0;
+		Curso curso = (Curso) obj;
+		return this.codcurso == curso.codcurso;
 	}
 
 	public Integer getCodcurso() {
@@ -104,6 +107,18 @@ public class Curso {
 
 	public void setSalas(List<Sala> salas) {
 		this.salas = salas;
+	}
+	
+	/**
+	 * Ordena o curso em ordem crescente pelo número de candidatos
+	 */
+	public static class ComparadorCurso implements Comparator<Curso>{
+
+		@Override
+		public int compare(Curso c1, Curso c2) {
+			return Integer.compare(c1.getCandidatos().size(), c2.getCandidatos().size());
+		}
+		
 	}
 
 

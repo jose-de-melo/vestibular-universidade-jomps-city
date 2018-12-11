@@ -172,6 +172,14 @@ public class Candidato implements Comparable<Candidato>{
 	public void setColocacao(Integer colocacao) {
 		this.colocacao = colocacao;
 	}
+	
+	public Sala getSala() {
+		return sala;
+	}
+
+	public void setSala(Sala sala) {
+		this.sala = sala;
+	}
 
 	/**
 	 *  Ordena em ordem decrescente, da maior nota para a menor.
