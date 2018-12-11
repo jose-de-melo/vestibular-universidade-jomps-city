@@ -40,8 +40,6 @@ public class ConsultaGabaritoMB {
 				Mensagem.msgErro("Número inválido!");
 			}
 		}
-
-
 		numeroQuestao = null;
 	}
 	

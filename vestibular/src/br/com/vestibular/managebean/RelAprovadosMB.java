@@ -37,7 +37,6 @@ public class RelAprovadosMB {
 	private void gerarArquivo() {
 		
 		try {
-			System.out.println(FacesContext.getCurrentInstance().getExternalContext().getRealPath("/resources"));
 			File arquivoTexto = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("/resources") + "/file.txt");
 			FileOutputStream outputStream = new FileOutputStream(arquivoTexto);
 			Formatter formatter = new Formatter(outputStream);
