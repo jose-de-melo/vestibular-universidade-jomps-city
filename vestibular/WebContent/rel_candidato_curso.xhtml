@@ -13,16 +13,16 @@
 		<p:messages />
 		
 		<h2>
-			<h:outputText value="Relatório de Alunos por Curso"/>
+			<h:outputText value="Relatório de Candidatos por Curso"/>
 		</h2>
 		
 		<br></br>
 		
 		<h:form>
-			<p:fieldset legend="Download do Relatório de Alunos por Curso">
+			<p:fieldset legend="Download do Relatório de Candidatos por Curso">
 			  		<h:outputText value="Download do Relatório"/>
 				    <p:commandButton value="Download" ajax="false" onclick="PrimeFaces.monitorDownload(start, stop);" icon="pi pi-arrow-down">
-				        <p:fileDownload value="#{relAlunosCursoMB.file}" />
+				        <p:fileDownload value="#{relCandCursoMB.file}" />
 				    </p:commandButton>      
 				
 			</p:fieldset>
@@ -30,7 +30,7 @@
 		
 		<br></br>
 		
-		<ui:repeat var="resultado" value="#{relAlunosCursoMB.resultados}">
+		<ui:repeat var="resultado" value="#{relCandCursoMB.resultados}">
 			<p:fieldset>
 				<div>
 					<h:outputLabel value="Curso" for="teste" />
@@ -61,7 +61,7 @@
 					</p:column>
 
 					<p:column>
-						<f:facet name="header">Nota</f:facet>
+						<f:facet name="header">Pontos</f:facet>
 					#{cand.totalpontos}
 				</p:column>
 

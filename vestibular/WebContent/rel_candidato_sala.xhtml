@@ -22,7 +22,7 @@
 			<p:fieldset legend="Download do Relatório de Aprovados">
 			  		<h:outputText value="Download do Relatório"/>
 				    <p:commandButton value="Download" ajax="false" onclick="PrimeFaces.monitorDownload(start, stop);" icon="pi pi-arrow-down">
-				        <p:fileDownload value="#{relAprovadosMB.file}" />
+				        <p:fileDownload value="#{relCandSalaMB.file}" />
 				    </p:commandButton>      
 				
 			</p:fieldset>
@@ -30,11 +30,11 @@
 		
 		<br></br>
 		
-		<ui:repeat var="resultado" value="#{relAprovadosMB.resultados}">
+		<ui:repeat var="resultado" value="#{relCandSalaMB.resultados}">
 			<p:fieldset>
 				<div>
-					<h:outputLabel value="Curso" for="teste" />
-					<h:outputLabel id="teste" value="#{resultado.curso.nome}" style="background-color: white; color: black; text-align:center;"/>
+					<h:outputLabel value="Sala" for="sala" />
+					<h:outputLabel id="sala" value="#{resultado.sala.codsala}" style="background-color: white; color: black; text-align:center;"/>
 				</div>
 				
 				<br></br>
@@ -61,7 +61,7 @@
 					</p:column>
 
 					<p:column>
-						<f:facet name="header">Pontos</f:facet>
+						<f:facet name="header">Nota</f:facet>
 					#{cand.totalpontos}
 				</p:column>
 
@@ -75,7 +75,7 @@
 				<br></br>
 				
 				<div>
-					<h:outputLabel value="Total Candidatos" />
+					<h:outputLabel value="Total Candidatos: " />
 					<h:outputLabel value="#{resultado.candidatos.size()}" style="background-color: white; color: black; text-align:center;"/>
 				</div>
 			</p:fieldset>

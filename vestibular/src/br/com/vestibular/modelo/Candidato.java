@@ -197,5 +197,19 @@ public class Candidato implements Comparable<Candidato>{
 		
 	}
 	
+	
+	/**
+	 * Ordena em ordem crescente pelos nomes do candidato
+	 */
+	public static class ComparadorNome implements Comparator<Candidato>{
+
+		@Override
+		public int compare(Candidato c1, Candidato c2) {
+			return c1.getNome().compareToIgnoreCase(c2.nome);
+		}
+		
+		
+	}
+
 
 }

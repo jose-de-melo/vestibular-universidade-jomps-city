@@ -52,33 +52,43 @@
 		<h:form>
 			<p:menubar>
 				<p:menuitem value="Login" url="login.xhtml" rendered="#{empty loginMB.login.CPF}"/>
+				
 				<p:submenu label="Usuário">
-								
 					<p:menuitem value="Cadastro" url="usuario.xhtml" rendered="#{loginMB.login.perfil == 'root' or empty loginMB.login.CPF}"/>
 					<p:separator />
-					
 					<p:menuitem value="Alterar Senha" url="altera_senha.xhtml" rendered="#{not empty loginMB.login.CPF}"/>
 				</p:submenu>
-				<p:menuitem value="Curso" url="curso.xhtml" />
-				<p:menuitem value="Candidato" url="candidato.xhtml" />
-				<p:menuitem value="Sala" url="sala.xhtml" />
 				
-				<p:submenu label="Consultas">
+				<p:submenu label="Cadastro" rendered="#{loginMB.login.perfil == 'root' or loginMB.login.perfil == 'sect'}">
+					<p:menuitem value="Curso" url="curso.xhtml" />
+					<p:separator />
+					<p:menuitem value="Candidato" url="candidato.xhtml" />
+					<p:separator />
+					<p:menuitem value="Sala" url="sala.xhtml" />
+					<p:separator />
+					<p:menuitem value="Gabarito" url="gabarito.xhtml" rendered="#{loginMB.login.perfil == 'root'}"/>
+				</p:submenu>
+				
+				<p:submenu label="Consultas" rendered="#{loginMB.login.perfil == 'root' or loginMB.login.perfil == 'sect'}">
 					<p:menuitem value="Candidato" url="consulta_candidato.xhtml"/>
 					<p:menuitem value="Curso" url="consulta_curso.xhtml"/>
 				</p:submenu>
 				
-				<p:menuitem value="Gabarito" url="gabarito.xhtml" />
-				<p:menuitem value="Correção" url="correcao.xhtml" />
+				<p:menuitem value="Correção" url="correcao.xhtml" rendered="#{loginMB.login.perfil == 'root'}"/>
+				<p:menuitem value="Distribuição" url="distribuicao.xhtml" rendered="#{loginMB.login.perfil == 'root' or loginMB.login.perfil == 'sect'}"/>
 				
 				<p:submenu label="Relatório">
-					<p:menuitem value="Alunos" url=""/>
-					<p:menuitem value="Alunos por Curso" url=""/>
-					<p:menuitem value="Alunos por Sala" url=""/>
-					<p:menuitem value="Alunos por Curso" url=""/>
+					<p:menuitem value="Candidatos" url="rel_candidato.xhtml"/>
+					<p:separator />
+					<p:menuitem value="Candidatos por Curso" url="rel_candidato_curso.xhtml"/>
+					<p:separator />
+					<p:menuitem value="Candidatos por Sala" url="rel_candidato_sala.xhtml"/>
+					<p:separator />
 					<p:menuitem value="Aprovados" url="rel_aprovados.xhtml" />
-					<p:menuitem value="Salas" url=""/>
-					<p:menuitem value="Gabarito" url=""/>
+					<p:separator />
+					<p:menuitem value="Salas" url="rel_sala.xhtml"/>
+					<p:separator />
+					<p:menuitem value="Gabarito" url="rel_gabarito.xhtml"/>
 				</p:submenu>
 		
 				<p:menuitem value="Sair" action="#{loginMB.logout}"  rendered="#{not empty loginMB.login.CPF}"/>

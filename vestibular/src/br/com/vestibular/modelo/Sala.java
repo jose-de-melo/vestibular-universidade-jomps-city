@@ -1,5 +1,6 @@
 package br.com.vestibular.modelo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -11,7 +12,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 
 @Entity
-public class Sala {
+public class Sala implements Comparable<Sala> {
 	
 	@Id
 	@SequenceGenerator(
@@ -26,9 +27,10 @@ public class Sala {
 	private Curso curso;
 	
 	@OneToMany(mappedBy="sala")
-	private List<Candidato> candidato;
+	private List<Candidato> candidatos;
 
 	public Sala() {
+		this.candidatos = new ArrayList<>();
 		this.curso = new Curso();
 	}
 
@@ -55,10 +57,30 @@ public class Sala {
 	public void setCurso(Curso curso) {
 		this.curso = curso;
 	}
+	
+	public List<Candidato> getCandidatos() {
+		return candidatos;
+	}
+
+	public void setCandidatos(List<Candidato> candidatos) {
+		this.candidatos = candidatos;
+	}
 
 	@Override
 	public String toString() {
 		return "Sala [codsala=" + codsala + ", capacidade=" + capacidade + ", curso=" + curso + "]";
+	}
+
+	@Override
+	public int compareTo(Sala s) {
+		if(codsala == null)
+			return 1;
+		
+		if(s.codsala == null)
+			return -1;
+		
+		
+		return codsala.compareTo(s.codsala);
 	}
 	
 }

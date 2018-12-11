@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="_template.xhtml">
+	<ui:define name="corpo">
+		<h:outputScript name="jsf.js" library="javax.faces" target="head" />
+
+		<p:messages />
+		
+		<h2>
+			<h:outputText value="Relatório do Gabarito"/>
+		</h2>
+		
+		<br></br>
+		
+		<h:form>
+			<p:fieldset legend="Download do Relatório do Gabarito">
+			  		<h:outputText value="Download do Relatório"/>
+				    <p:commandButton value="Download" ajax="false" onclick="PrimeFaces.monitorDownload(start, stop);" icon="pi pi-arrow-down">
+				        <p:fileDownload value="#{relGabaritoMB.file}" />
+				    </p:commandButton>      
+				
+			</p:fieldset>
+		</h:form>
+		
+		<br></br>
+		
+		<p:fieldset>
+			<br></br>
+			
+			<p:dataTable value="#{relGabaritoMB.gabaritos}" var="gabarito">
+
+				<p:column>
+					<f:facet name="header">Questão</f:facet>
+				#{gabarito.numeroquestao}
+			</p:column>
+
+				<p:column>
+					<f:facet name="header">Resposta</f:facet>
+				#{gabarito.reposta}
+			</p:column>
+			
+			</p:dataTable>
+			<br></br>
+			
+		</p:fieldset>
+
+	</ui:define>
+</ui:composition>
+</html>

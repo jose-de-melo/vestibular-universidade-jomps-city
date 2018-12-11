@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 
 @Entity
-public class Gabarito {
+public class Gabarito implements Comparable<Gabarito> {
 
 	@Id
 	@SequenceGenerator(
@@ -42,5 +42,18 @@ public class Gabarito {
 	public String toString() {
 		return "Gabarito [numeroquestao=" + numeroquestao + ", reposta=" + reposta + "]";
 	}
+
+	@Override
+	public int compareTo(Gabarito g) {
+		if(numeroquestao == null)
+			return 1;
+		if(g.getNumeroquestao() == null)	
+			return -1;
+		
+		return numeroquestao.compareTo(g.numeroquestao);
+	}
+	
+	
+	
 
 }

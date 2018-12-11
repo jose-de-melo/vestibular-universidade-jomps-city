@@ -17,20 +17,19 @@ import org.primefaces.model.StreamedContent;
 
 import br.com.vestibular.dao.CandidatoDAO;
 import br.com.vestibular.dao.DAO;
-import br.com.vestibular.managebean.RelAprovadosMB.Resultado;
 import br.com.vestibular.modelo.Candidato;
-import br.com.vestibular.modelo.Curso;
+import br.com.vestibular.modelo.Sala;
 
 @ManagedBean
 @ViewScoped
-public class RelAlunosCursoMB {
+public class RelCandSalaMB {
 	
 	private List<Resultado> resultados;
 	private StreamedContent file;
 
-	public RelAlunosCursoMB() {
+	public RelCandSalaMB() {
 		resultados = new ArrayList<>();
-		obterAlunosCurso();
+		obterCandidatosSala();
 		gerarArquivo();
 	}
 	
@@ -42,11 +41,11 @@ public class RelAlunosCursoMB {
 			FileOutputStream outputStream = new FileOutputStream(arquivoTexto);
 			Formatter formatter = new Formatter(outputStream);
 			
-			formatter.format("# Relatório de Alunos por Curso\r\n\r\n");
+			formatter.format("# Relatório de Candidatos por Sala\r\n\r\n");
 			
 			for(Resultado res : resultados) {
 				
-				formatter.format("Curso: %s\r\n", res.getCurso().getNome());
+				formatter.format("Sala: %05s\r\n", res.getSala().getCodsala());
 				formatter.format("%-12s %-35s %-20s %-11s\r\n", "Inscrição", "Nome", "Data de Nascimento", "Colocação");
 				
 				for(Candidato c : res.getCandidatos()) {
@@ -65,21 +64,22 @@ public class RelAlunosCursoMB {
 		}
 	}
 
-	public void obterAlunosCurso() {
-		DAO<Curso> daoCurso = new DAO<>(Curso.class);
+	public void obterCandidatosSala() {
+		DAO<Sala> daoSala = new DAO<>(Sala.class);
 		
 		CandidatoDAO daoCand = new CandidatoDAO();
 		
-		List<Curso> cursos = daoCurso.listaTodos();
-		for(Curso c : cursos) {
-			Resultado r = new RelAprovadosMB.Resultado();
+		List<Sala> salas = daoSala.listaTodos();
+		for(Sala s : salas) {
+			Resultado r = new Resultado();
 			
-			List<Candidato> candidatos = daoCand.pesquisaPorCurso(c.getCodcurso());
-			// Ordena por colocação
-			Collections.sort(candidatos, new Candidato.ComparadorColocacao());
+			List<Candidato> candidatos = daoCand.pesquisaPorSala(s.getCodsala());
+			
+			// Ordena por Nome
+			Collections.sort(candidatos, new Candidato.ComparadorNome());
 			
 			r.setCandidatos(candidatos);
-			r.setCurso(c);
+			r.setSala(s);
 			resultados.add(r);
 		}
 		
@@ -96,12 +96,41 @@ public class RelAlunosCursoMB {
 	public StreamedContent getFile() {
 		try {
 			InputStream stream = FacesContext.getCurrentInstance().getExternalContext().getResourceAsStream("/resources/file.txt");
-			file = new DefaultStreamedContent(stream, "text/plain", "relatorio_alunos_curso.txt");
+			file = new DefaultStreamedContent(stream, "text/plain", "relatorio_candidatos_sala.txt");
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
      
         return file;
     }	
+	
+	public static class Resultado{
+		
+		private Sala sala;
+		private List<Candidato> candidatos;
+		
+		
+		public Resultado() {
+			sala = new Sala();
+			candidatos = new ArrayList<>();
+		}
+		
+		public Sala getSala() {
+			return sala;
+		}
+
+		public void setSala(Sala sala) {
+			this.sala = sala;
+		}
+
+		public List<Candidato> getCandidatos() {
+			return candidatos;
+		}
+		public void setCandidatos(List<Candidato> candidatos) {
+			this.candidatos = candidatos;
+		}
+		
+	}
+
 	
 }

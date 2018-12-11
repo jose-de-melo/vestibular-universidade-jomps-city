@@ -22,14 +22,33 @@ public class CandidatoDAO extends DAO<Candidato>{
 		query.setParameter("pCurso", codcurso);
 		
 		List<Candidato> candidatos = new ArrayList<Candidato>();
-		for(Object objetot : query.getResultList()) {
-			candidatos.add((Candidato)objetot);
+		for(Object objeto : query.getResultList()) {
+			candidatos.add((Candidato)objeto);
 		}
 		
 		em.getTransaction().commit();
 		em.close();
 		
 		return candidatos;
+	}
+
+	public List<Candidato> pesquisaPorSala(Integer codsala) {
+		EntityManager em = new JPAUtil().getEntityManager();
+		em.getTransaction().begin();
+
+		Query query = em.createQuery("FROM Candidato u WHERE u.sala.codsala = :pSala");
+		query.setParameter("pSala", codsala);
+		
+		List<Candidato> candidatos = new ArrayList<Candidato>();
+		for(Object objeto : query.getResultList()) {
+			candidatos.add((Candidato)objeto);
+		}
+		
+		em.getTransaction().commit();
+		em.close();
+		
+		return candidatos;
+
 	}
 
 }
