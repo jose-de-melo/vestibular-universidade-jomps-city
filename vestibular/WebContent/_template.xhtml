@@ -51,6 +51,7 @@
 			===================-->
 		<h:form>
 			<p:menubar>
+				<p:menuitem value="Home" url="index.xhtml"/>
 				<p:menuitem value="Login" url="login.xhtml" rendered="#{empty loginMB.login.CPF}"/>
 				
 				<p:submenu label="Usuário">
@@ -71,15 +72,18 @@
 				
 				<p:submenu label="Consultas" rendered="#{loginMB.login.perfil == 'root' or loginMB.login.perfil == 'sect'}">
 					<p:menuitem value="Candidato" url="consulta_candidato.xhtml"/>
+					<p:separator />
 					<p:menuitem value="Curso" url="consulta_curso.xhtml"/>
+					<p:separator />
 					<p:menuitem value="Sala" url="consulta_sala.xhtml"/>
+					<p:separator />
 					<p:menuitem value="Gabarito" url="consulta_gabarito.xhtml"/>
 				</p:submenu>
 				
 				<p:menuitem value="Correção" url="correcao.xhtml" rendered="#{loginMB.login.perfil == 'root'}"/>
 				<p:menuitem value="Distribuição" url="distribuicao.xhtml" rendered="#{loginMB.login.perfil == 'root' or loginMB.login.perfil == 'sect'}"/>
 				
-				<p:submenu label="Relatório">
+				<p:submenu label="Relatório" rendered="#{not empty loginMB.login.CPF}">
 					<p:menuitem value="Candidatos" url="rel_candidato.xhtml"/>
 					<p:separator />
 					<p:menuitem value="Candidatos por Curso" url="rel_candidato_curso.xhtml"/>

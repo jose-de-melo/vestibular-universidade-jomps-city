@@ -8,7 +8,36 @@
 
 <ui:composition template="/_template.xhtml">
 	<ui:define name="corpo">
+		<h:outputScript name="jsf.js" library="javax.faces" target="head" />
+		
+		<p:messages />
+
+		<h:form id="cadastro">
 	
+			<h2>
+				<h:outputText value="Alterar Senha"/>
+			</h2>
+			
+			<!-- Dados do usuário
+				================== -->
+			<p:fieldset legend="Meus dados">
+			
+				<h:outputLabel value="CPF:" for="CPF"/>	
+				<p:inputMask id="CPF" value="#{usuarioMB.usuario.CPF}" mask="999.999.999-99" disabled="true">
+					<f:validator validatorId="valida_cpf"></f:validator>
+				</p:inputMask>
+
+				<h:outputLabel value="Nova Senha" for="senha" />
+				<p:inputText type="password" id="senha" value="#{usuarioMB.usuario.senha}" />
+				
+			</p:fieldset>
+			
+			<h:commandButton value="Salvar" action="#{usuarioMB.salvar}">
+			</h:commandButton>
+			
+			<h:commandButton value="Cancelar" action="index.xhtml">
+			</h:commandButton>
+		</h:form>
 		
 	</ui:define>
 </ui:composition>

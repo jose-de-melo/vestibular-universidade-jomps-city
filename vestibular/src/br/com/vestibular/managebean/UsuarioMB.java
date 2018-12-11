@@ -14,28 +14,49 @@ import br.com.vestibular.modelo.Login;
 public class UsuarioMB {
 
 	private Login usuario;
+	private boolean alterar;
 
 	public UsuarioMB() {
-		usuario = new Login();
+		alterar = false;
+		Login login = obterUsuarioLogado();
+		usuario = (login == null)? new Login() : login;
 	}
 
-	public void salvar(){
+	private Login obterUsuarioLogado() {
+		FacesContext context = FacesContext.getCurrentInstance();
+		
+		if(context.getViewRoot().getViewId().equals("/altera_senha.xhtml")) {
+			alterar = true;
+			LoginMB loginBean = context.getApplication().evaluateExpressionGet(context, "#{loginMB}", LoginMB.class);
+			return (loginBean.isLogado()) ? loginBean.getLogin() : null;
+		}
+		
+		return null;
+	}
+
+	public String salvar(){
 		DAO<Login> dao = new DAO<>(Login.class);
 		
-		// Insere o perfil com base no usuário que está logado ou não
-		inserirPerfilUsuario();
-		
 		if(usuario.getCPF() != null) {
-			try {
+			Login login = dao.listaPorPK(usuario.getCPF());
+			
+			if(login == null) {
+				// Insere o perfil com base no usuário que está logado ou não
+				inserirPerfilUsuario();
 				dao.adiciona(usuario);
-				Mensagem.msgInfo("Cadastrado com sucesso!");
-			}catch (Exception e) {
-				e.printStackTrace();
-				Mensagem.msgErro("CPF já foi cadastrado!");
-			}
+				
+				Mensagem.msgInfo("Usuário cadastrado com sucesso!");
+			}else if(alterar) {
+				dao.altera(usuario);
+				Mensagem.msgInfo("Senha alterada com sucesso!");
+				return "index?faces-redirect=true";
+			}else
+				Mensagem.msgErro("O CPF já existe!");
+				
 		}
 
 		usuario = new Login();
+		return "";
 	}
 
 
