@@ -26,7 +26,7 @@ public class Sala {
 	private Curso curso;
 	
 	@OneToMany(mappedBy="sala")
-	private List<Candidato> candidato;
+	private List<Candidato> candidatos;
 
 	public Sala() {
 		this.curso = new Curso();
@@ -54,6 +54,14 @@ public class Sala {
 
 	public void setCurso(Curso curso) {
 		this.curso = curso;
+	}
+
+	public List<Candidato> getCandidatos() {
+		return candidatos;
+	}
+
+	public void setCandidatos(List<Candidato> candidatos) {
+		this.candidatos = candidatos;
 	}
 
 	@Override
