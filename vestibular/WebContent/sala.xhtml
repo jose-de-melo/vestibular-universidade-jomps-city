@@ -12,32 +12,67 @@
 		<h:outputScript name="jsf.js" library="javax.faces" target="head" />
 
 		<h:form id="cadastro">
-			<p:messages/>
-		
+			<p:messages />
+
 			<h2>
-				<h:outputText value="Cadastrar Sala" />
+				<h:outputText value="Cadastrar Sala"
+					rendered="#{not empty salaMB.sala.codsala}" />
+				<h:outputText value="Cadastrar Sala"
+					rendered="#{empty salaMB.sala.codsala}" />
 			</h2>
-			
+
 			<p:fieldset legend="Forneça os seguintes dados">
-				<h:outputLabel value="Curso:" for="cur"/>
-				
-				<h:selectOneMenu id="cur" value="#{salaMB.sala.curso.codcurso}" style="background-color: white;">
-					<f:selectItems value="#{cursoMB.cursos}" var="curso" itemValue="#{curso.codcurso}" itemLabel="#{curso.nome}"/>
+				<h:outputLabel value="Curso:" for="cur" />
+
+				<h:selectOneMenu id="cur" value="#{salaMB.sala.curso.codcurso}"
+					style="background-color: white;">
+					<f:selectItems value="#{cursoMB.cursos}" var="curso"
+						itemValue="#{curso.codcurso}" itemLabel="#{curso.nome}" />
 				</h:selectOneMenu>
-			
-				<h:outputLabel value="Capacidade da Sala:" for="capacidade"/>
-				<p:inputMask id="capacidade" value="#{salaMB.sala.capacidade}" 
+
+				<h:outputLabel value="Capacidade da Sala:" for="capacidade" />
+				<p:inputMask id="capacidade" value="#{salaMB.sala.capacidade}"
 					required="true" requiredMessage="A capacidade não pode ser vazia"
 					validatorMessage="A capacidade deve ser maior que 0!">
-					
-					<f:validateDoubleRange minimum="1" /> 
+
+					<f:validateDoubleRange minimum="1" />
 				</p:inputMask>
-			
+
 				<h:commandButton value="Cadastrar" action="#{salaMB.salvar}">
-					<f:ajax execute="@form" render=":cadastro"/>
+					<f:ajax execute="@form" render=":cadastro :lista" />
 				</h:commandButton>
 			</p:fieldset>
 		</h:form>
+
+		<h:form id="lista">
+			<p:dataTable value="#{salaMB.salas}" var="sala"
+				style="text-align: center;">
+				<p:column>
+					<f:facet name="header">Código</f:facet>
+						#{sala.codsala}
+					</p:column>
+
+				<p:column>
+					<f:facet name="header">Curso</f:facet>
+						#{sala.curso.nome}
+					</p:column>
+
+				<p:column>
+					<f:facet name="header">Capacidade</f:facet>
+						#{sala.capacidade}
+					</p:column>
+
+				<p:column>
+					<p:commandLink styleClass="btn" style="color:black;"
+						value="Alterar">
+						<f:setPropertyActionListener value="#{sala}"
+							target="#{salaMB.sala}" />
+						<f:ajax execute="@form" render=":cadastro" />
+					</p:commandLink>
+				</p:column>
+			</p:dataTable>
+		</h:form>
+
 	</ui:define>
 </ui:composition>
 </html>

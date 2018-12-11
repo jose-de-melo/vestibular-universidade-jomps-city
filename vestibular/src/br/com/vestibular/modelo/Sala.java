@@ -66,6 +66,14 @@ public class Sala implements Comparable<Sala> {
 		this.candidatos = candidatos;
 	}
 
+	public List<Candidato> getCandidatos() {
+		return candidatos;
+	}
+
+	public void setCandidatos(List<Candidato> candidatos) {
+		this.candidatos = candidatos;
+	}
+
 	@Override
 	public String toString() {
 		return "Sala [codsala=" + codsala + ", capacidade=" + capacidade + ", curso=" + curso + "]";
