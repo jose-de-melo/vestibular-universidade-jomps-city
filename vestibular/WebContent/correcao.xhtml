@@ -8,25 +8,15 @@
 
 <ui:composition template="/_template.xhtml">
 	<ui:define name="corpo">
-
-		<h:form id="cadastro">
-			<p:messages />
-				
-			<p:fieldset legend="Realizar Correção">
-				<h:outputText value="Respostas dos candidatos" for="respostas" />
-
-				<p:inputTextarea id="respostas" value="#{correcaoMB.respostasString}" style="width:90%" autoResize="true">
-				</p:inputTextarea>
-				<p:watermark for="respostas" value="Ex.:                                                           
-														 DAW00001ABCBCEDDACBEABECBAEEBABBCEAACBAEECBCBEACBEACBEACBA
-														 DAW00001ABCBCEDDACBEABECBAEEBABBCEAACBAEECBCBEACBEACBEACBA"/>
-				
-				<h:commandButton value="Enviar" action="#{correcaoMB.upload}" />
-			</p:fieldset>
+		<h:form enctype="multipart/form-data" id="cadastro">
+    		<p:messages/>
+    		
+    		<p:fieldset legend="Selecionar o Arquivo">
+	    		<p:fileUpload value="#{correcaoMB.file}" mode="simple" skinSimple="true" allowTypes="/(\.|\/)(txt)$/" invalidFileMessage="Formato de arquivo inválido!" label="Selecione um arquivo..." auto="true" multiple="false"/>
+	     
+	    		<p:commandButton value="Corrigir" ajax="false" action="#{correcaoMB.carregarArquivo}" />
+    		</p:fieldset>
 		</h:form>
-
-
-
 	</ui:define>
 </ui:composition>
 </html>

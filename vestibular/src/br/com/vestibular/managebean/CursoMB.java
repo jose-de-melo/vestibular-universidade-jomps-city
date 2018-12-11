@@ -35,19 +35,22 @@ public class CursoMB {
 		}
 
 		this.curso = new Curso();
-		getCursos();
+		cursos = getCursos();
 	}
 	
 	public void remover(Curso curso) {
 		DAO<Curso> dao = new DAO<>(Curso.class);
 		dao.remove(curso);
-		Mensagem.msgInfo("Curso removido com sucesso.");
+		Mensagem.msgDelete("Curso removido com sucesso.");
+		cursos = getCursos();
 	}
 
 	public List<Curso> getCursos() {
-		DAO<Curso> dao = new DAO<>(Curso.class);
-		cursos = dao.listaTodos();		
-		return cursos;
+		return new DAO<>(Curso.class).listaTodos();
+	}
+	
+	public void setCursos(List<Curso> cursos) {
+		this.cursos = cursos;
 	}
 
 	public Curso getCurso() {
@@ -58,4 +61,5 @@ public class CursoMB {
 		this.curso = curso;
 	}
 
+	
 }
